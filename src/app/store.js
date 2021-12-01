@@ -11,4 +11,4 @@ export const store = configureStore({
     getDefaultMiddleware().concat(tourManagerApi.middleware),
 });
 
-setupListeners(store.dispatch());
+setupListeners(store.dispatch);
