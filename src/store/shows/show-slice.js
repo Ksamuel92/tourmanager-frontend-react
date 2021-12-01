@@ -24,5 +24,6 @@ const showSlice = createSlice({
 });
 
 export const showActions = showSlice.actions;
+export const showReducer = showSlice.reducer;
 
 export default showSlice;
