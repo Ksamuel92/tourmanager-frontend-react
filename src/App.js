@@ -1,14 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
+
 import "./App.css";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
+
+import { Container } from "@material-ui/core";
+import LandingGrid from "./layout/LandingGrid";
+import { Typography } from "@mui/material";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
     <div className="App">
-      <p>This is text</p>
-      <BottomNavigation />
+      <Layout>
+        <Container>
+          <Typography variant="h1">TourManager</Typography>
+        </Container>
+        <LandingGrid />
+      </Layout>
     </div>
   );
 }
