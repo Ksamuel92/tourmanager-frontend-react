@@ -1,4 +1,4 @@
-import { tourManagerApi } from "./api";
+import { tourManagerApi } from "../../services/api";
 
 const showApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
