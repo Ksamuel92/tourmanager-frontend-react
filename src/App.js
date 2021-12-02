@@ -1,18 +1,18 @@
 import React from "react";
 import "./App.css";
-import { Container } from "@material-ui/core";
+
 import LandingGrid from "./layout/LandingGrid";
-import { Typography } from "@mui/material";
+import LandingHeader from "./layout/LandingHeader";
+
 import Layout from "./layout/Layout";
 import Shows from "./pages/Shows";
+import SignInSide from "./users/SignInSide";
 
 function App() {
   return (
     <div className="App">
       <Layout>
-        <Container>
-          <Typography variant="h1">TourManager</Typography>
-        </Container>
+        <LandingHeader />
         <LandingGrid />
         <Shows />
       </Layout>
