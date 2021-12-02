@@ -1,15 +1,24 @@
-import { Container } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { Typography } from "@mui/material";
-
+import { makeStyles } from "@material-ui/core/styles";
+import { Fragment } from "react";
 const LandingHeader = () => {
   return (
-    <Container>
-      <Typography variant="h1">TourManager</Typography>
-      <Typography variant="subtitle1">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-        blanditiis tenetur
-      </Typography>
-    </Container>
+    <Fragment>
+      <Box
+        mt={5}
+        sx={{
+          height: 150,
+        }}
+      >
+        <Typography variant="h1">TourManager</Typography>
+      </Box>
+      <Box>
+        <Typography variant="subtitle1" gutterBottom component="div">
+          Lorem ipsum dolor sit amet, consecteturasdfsdfasdfsadfsadfasdf
+        </Typography>
+      </Box>
+    </Fragment>
   );
 };
 
