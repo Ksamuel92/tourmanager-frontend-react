@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,15 +19,21 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  toolbar: {
+    justifyContent: "flex-end",
+  },
 }));
 
- const NavBar = () => {
+const NavBar = () => {
   const classes = useStyles();
+  const params = useParams();
+  debugger;
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
+          <Button color="inherit">Login</Button>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -35,14 +42,13 @@ const useStyles = makeStyles((theme) => ({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}>
             TourManager
-          </Typography>
-          <Button color="inherit">Login</Button>
+          </Typography> */}
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
-export default NavBar
+export default NavBar;
