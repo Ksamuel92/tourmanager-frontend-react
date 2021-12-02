@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,12 +19,16 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  login: {
+    margin: "1rem",
+    textDecoration: "none",
+    color: "white",
+    fontFamily: theme.typography.fontFamily,
+  },
 }));
 
 const NavBar = () => {
   const classes = useStyles();
-  const params = useParams();
-  debugger;
 
   return (
     <div className={classes.root}>
@@ -41,7 +45,9 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             TourManager
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Link to={"auth"} className={classes.login}>
+            <Button color="inherit">Login</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
