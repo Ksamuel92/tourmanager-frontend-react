@@ -6,8 +6,7 @@ import LandingHeader from "./layout/LandingHeader";
 
 import Layout from "./layout/Layout";
 import Shows from "./pages/Shows";
-import SignInSide from "./users/SignInSide";
-
+import Promoters from "./pages/Promoters";
 function App() {
   return (
     <div className="App">
@@ -15,6 +14,7 @@ function App() {
         <LandingHeader />
         <LandingGrid />
         <Shows />
+        <Promoters />
       </Layout>
     </div>
   );
