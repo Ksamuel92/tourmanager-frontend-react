@@ -46,7 +46,7 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
 export const {
   useGetShowsQuery,
   usegetShowByIdQuery,
-  useAddShowQuery,
-  useEditShowQuery,
-  useDeleteShowQuery,
+  useAddShowMutation,
+  useEditShowMutation,
+  useDeleteShowMutation,
 } = showApiEndpoints;
