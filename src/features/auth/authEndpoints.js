@@ -15,6 +15,12 @@ const authApiEndpoints = tourManagerApi.injectEndpoints({
         method: 'POST',
         body: credentials
       })
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: 'logout',
+        method: 'DELETE',
+      })
     })
   }
 })
