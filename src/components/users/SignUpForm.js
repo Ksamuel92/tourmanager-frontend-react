@@ -7,14 +7,11 @@ import {
 } from "@material-ui/core";
 import useInput from "../../hooks/useInput";
 import { useSignUpMutation } from "../../features/auth/authEndpoints";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setCredentials } from "../../features/auth/authSlice";
 
 const SignUpForm = () => {
   const [signUpUser, { data, error, isLoading, isSuccess, isError }] =
     useSignUpMutation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { value: name, bind: bindName, reset: resetName } = useInput("");
   const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
@@ -31,9 +28,9 @@ const SignUpForm = () => {
 
     try {
       const response = await signUpUser(formState).unwrap();
-      debugger;
+
       const { data: user } = response;
-      dispatch(setCredentials(user));
+      // console.log
       navigate("/");
     } catch (err) {
       console.log(err);
