@@ -8,7 +8,6 @@ const LandingGrid = () => {
       <Grid item xs={4}>
         <Card
           variant="outlined"
-          raised={true}
           sx={{
             bgcolor: "background.paper",
             boxShadow: 1,
@@ -29,7 +28,6 @@ const LandingGrid = () => {
       <Grid item xs={4}>
         <Card
           variant="outlined"
-          raised={true}
           sx={{
             bgcolor: "background.paper",
             boxShadow: 1,
@@ -50,7 +48,6 @@ const LandingGrid = () => {
       <Grid item xs={4}>
         <Card
           variant="outlined"
-          raised={true}
           sx={{
             bgcolor: "background.paper",
             boxShadow: 1,
