@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  toolbar: {
-    justifyContent: "flex-end",
-  },
 }));
 
 const NavBar = () => {
@@ -32,8 +29,7 @@ const NavBar = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar className={classes.toolbar}>
-          <Button color="inherit">Login</Button>
+        <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -42,9 +38,10 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             TourManager
-          </Typography> */}
+          </Typography>
+          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
