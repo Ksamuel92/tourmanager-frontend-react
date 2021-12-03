@@ -1,6 +1,5 @@
 import { Box } from "@material-ui/core";
 import { Typography } from "@mui/material";
-import { makeStyles } from "@material-ui/core/styles";
 import { Fragment } from "react";
 const LandingHeader = () => {
   return (
