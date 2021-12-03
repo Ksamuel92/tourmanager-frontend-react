@@ -12,6 +12,8 @@ import Layout from "./layout/Layout";
 import LandingPage from "./pages/LandingPage";
 import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@mui/material";
+import DateAdapter from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,25 +28,27 @@ function App() {
   const classes = useStyles();
   return (
     <div className="App">
-      <CssBaseline />
-      <div className={classes.root}>
-        <Layout>
-          <main>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="shows" element={<Shows />}>
-                <Route path=":id" element={<ShowDetails />} />
-                <Route path="new" element={<NewShowForm />} />
-              </Route>
-              <Route path="promoters" element={<Promoters />}>
-                <Route path=":slug" element={<PromoterDetails />} />
-                <Route path="new" element={<NewPromoterForm />} />
-              </Route>
-              <Route path="/auth" element={<Auth />} />
-            </Routes>
-          </main>
-        </Layout>
-      </div>
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <CssBaseline />
+        <div className={classes.root}>
+          <Layout>
+            <main>
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="shows" element={<Shows />}>
+                  <Route path=":id" element={<ShowDetails />} />
+                  <Route path="new" element={<NewShowForm />} />
+                </Route>
+                <Route path="promoters" element={<Promoters />}>
+                  <Route path=":slug" element={<PromoterDetails />} />
+                  <Route path="new" element={<NewPromoterForm />} />
+                </Route>
+                <Route path="/auth" element={<Auth />} />
+              </Routes>
+            </main>
+          </Layout>
+        </div>
+      </LocalizationProvider>
     </div>
   );
 }
