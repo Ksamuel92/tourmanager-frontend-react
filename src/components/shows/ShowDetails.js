@@ -21,7 +21,7 @@ const ShowDetails = (props) => {
       />
       <CardContent>
         <Typography variant="h6">
-          {venue} - {date.} - {loadin}
+          {venue} - {date} - {loadin}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {green_room
