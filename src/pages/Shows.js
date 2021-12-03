@@ -1,5 +1,5 @@
 import { useGetShowsQuery } from "../features/shows/show-slice";
-
+import ShowDetails from "../components/shows/ShowDetails";
 const Shows = () => {
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery();
   return (
@@ -9,7 +9,7 @@ const Shows = () => {
       {isError && error.message}
       {isSuccess &&
         data &&
-        data.map((show) => <h2 key={show.id}>{show.venue}</h2>)}
+        data.map((show) => <ShowDetails key={show.id} show={show} />)}
     </div>
   );
 };
