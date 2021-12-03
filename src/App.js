@@ -6,22 +6,32 @@ import NewShowForm from "./components/shows/NewShowForm";
 import Promoters from "./pages/Promoters";
 import PromoterDetails from "./components/promoters/PromoterDetails";
 import NewPromoterForm from "./components/promoters/NewPromoterForm";
-import SignUpForm from "./components/users/SignUpForm";
+import Auth from "./pages/Auth";
 import { Routes, Route } from "react-router-dom";
-
-import LandingGrid from "./layout/LandingGrid";
-import LandingHeader from "./layout/LandingHeader";
-
 import Layout from "./layout/Layout";
+import LandingPage from "./pages/LandingPage";
+import { makeStyles } from "@material-ui/core/styles";
+import { CssBaseline } from "@mui/material";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    backgroundImage: `url(${process.env.PUBLIC_URL + "/assets/bg.jpg"})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  },
+}));
+
 function App() {
+  const classes = useStyles();
   return (
     <div className="App">
-      <Layout>
-        <LandingHeader />
-        <SignUpForm />
-        <main>
-          <Routes>
-            <Route path="/" element={<LandingHeader />}>
+      <CssBaseline />
+      <div className={classes.root}>
+        <Layout>
+          <main>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
               <Route path="shows" element={<Shows />}>
                 <Route path=":id" element={<ShowDetails />} />
                 <Route path="new" element={<NewShowForm />} />
@@ -30,12 +40,11 @@ function App() {
                 <Route path=":slug" element={<PromoterDetails />} />
                 <Route path="new" element={<NewPromoterForm />} />
               </Route>
-            </Route>
-          </Routes>
-          <Shows />
-          <LandingGrid />
-        </main>
-      </Layout>
+              <Route path="/auth" element={<Auth />} />
+            </Routes>
+          </main>
+        </Layout>
+      </div>
     </div>
   );
 }
