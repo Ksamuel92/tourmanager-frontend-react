@@ -5,15 +5,10 @@ import { Fragment } from "react";
 const LandingHeader = () => {
   return (
     <Fragment>
-      <Box
-        mt={5}
-        sx={{
-          height: 150,
-        }}
-      >
+      <Box>
         <Typography variant="h1">TourManager</Typography>
       </Box>
-      <Box>
+      <Box mt={2}>
         <Typography variant="subtitle1" gutterBottom component="div">
           Lorem ipsum dolor sit amet, consecteturasdfsdfasdfsadfsadfasdf
         </Typography>
