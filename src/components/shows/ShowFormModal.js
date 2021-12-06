@@ -6,9 +6,10 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import NewShowForm from "./NewShowForm";
+import EditShowForm from "./EditShowForm";
 
 const ShowFormModal = (props) => {
+  // debugger;
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
       <DialogTitle>Subscribe</DialogTitle>
@@ -17,7 +18,11 @@ const ShowFormModal = (props) => {
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
         </DialogContentText>
-        <NewShowForm show={props.show} />
+        <EditShowForm
+          show={props.show}
+          open={props.open}
+          handleClose={props.handleClose}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={props.handleClose}>Cancel</Button>
