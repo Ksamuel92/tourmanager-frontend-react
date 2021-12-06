@@ -1,5 +1,6 @@
+import SignUpForm from "../components/users/SignUpForm";
 const Auth = () => {
-  return <p>This is the Auth page</p>;
+  return <SignUpForm />;
 };
 
 export default Auth;
