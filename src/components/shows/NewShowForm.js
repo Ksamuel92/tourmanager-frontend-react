@@ -7,12 +7,16 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";
+import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
+// import ExistingPromoterFields from "../promoters/ExistingPromoterFields";
 
 const NewShowForm = () => {
   const [showFormState, setShowFormState] = useState({});
@@ -21,12 +25,21 @@ const NewShowForm = () => {
     date: new Date(),
     loadin: new Date(),
   });
-  const [submitShow, { data, isSuccess }] = useAddShowMutation();
+  const [existingPromoter, setExistingPromoter] = useState("");
+  const [createNewPromoter, setCreateNewPromoter] = useState(true);
+
+  const {
+    data: promoterData,
+    error,
+    isSuccess,
+    isError,
+  } = useGetPromotersQuery();
+  const [submitShow, { isSuccess: showSubmitted }] = useAddShowMutation();
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
     const promoterFieldCheck = id.split("-")[0];
-    if (promoterFieldCheck === "promoter") {
+    if (name !== "promoter_id" && promoterFieldCheck === "promoter") {
       setPromoterFormState({
         ...promoterFormState,
         [name]: value,
@@ -40,6 +53,14 @@ const NewShowForm = () => {
       });
   };
 
+  const handleExistingPromoter = (e) => {
+    debugger;
+    const { name, value } = e.target;
+    setExistingPromoter({
+      ...existingPromoter,
+      [name]: value,
+    });
+  };
   const handleCheck = (e) => {
     const { name, checked } = e.target;
     setShowFormState({
@@ -89,6 +110,7 @@ const NewShowForm = () => {
       console.log(err);
     }
   };
+  // console.log(promoterData);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -160,6 +182,27 @@ const NewShowForm = () => {
           label="Green Room"
           labelPlacement="start"
         />
+        <FormControl fullWidth>
+          <InputLabel id="existing-promoter">Promoter</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Promoter"
+            name="promoter_id"
+            value={existingPromoter.promoter_id || ""}
+            onChange={handleExistingPromoter}
+          >
+            {isError && error.message}
+            {isSuccess &&
+              promoterData &&
+              promoterData.map((promoter) => (
+                <MenuItem key={promoter.id} value={promoter.id}>
+                  {" "}
+                  {promoter.name}{" "}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
         <TextField
           id="promoter-name"
           name="name"
@@ -174,7 +217,7 @@ const NewShowForm = () => {
         />
 
         <Button type="submit">Submit </Button>
-        {isSuccess && <p>Show successfully created!</p>}
+        {showSubmitted && <p>Show successfully created!</p>}
       </Grid>
     </form>
   );
