@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import Shows from "./pages/Shows";
-import ShowDetails from "./components/shows/ShowDetails";
 import NewShowForm from "./components/shows/NewShowForm";
 import Promoters from "./pages/Promoters";
 import PromoterDetails from "./components/promoters/PromoterDetails";
