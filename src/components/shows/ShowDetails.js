@@ -3,9 +3,20 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
+import ShowFormModal from "./ShowFormModal";
+import { useState } from "react";
+
 const ShowDetails = (props) => {
   const { venue, date, loadin, guarantee, merch, green_room, wifi } =
     props.show;
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = (e) => {
+    setOpen(true);
+  };
+  const handleClose = (e) => {
+    setOpen(false);
+  };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -33,9 +44,15 @@ const ShowDetails = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
-        <Button size="small"> Delete</Button>
+        <Button size="small" onClick={handleClickOpen}>
+          Edit
+        </Button>
+        <Button size="small" onClick={handleClickOpen}>
+          {" "}
+          Delete
+        </Button>
       </CardActions>
+      <ShowFormModal show={props.show} open={open} handleClose={handleClose} />
     </Card>
   );
 };
