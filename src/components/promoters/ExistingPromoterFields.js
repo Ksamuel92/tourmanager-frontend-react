@@ -1,33 +1,45 @@
 import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
 import { useState } from "react";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-const ExistingPromoterFields = () => {
+const ExistingPromoterFields = (props) => {
   const {
     data: promoterData,
     error,
-    isLoading,
+    isSuccess,
     isError,
   } = useGetPromotersQuery();
-  console.log(promoterData);
-  console.log(error);
-  console.log(isLoading);
-  console.log(isError);
-  const [existingPromoter, setExistingPromoter] = useState({});
-  // debugger;
-  // const existingPromoters = promoterData.map((promoter) => (
-  //   <MenuItem key={promoter.id} value={promoter.id} />
-  // ));
+
+  const [existingPromoter, setExistingPromoter] = useState("");
+
+  const handleSelectChange = (e) => {
+    const { name, value } = e.target;
+    setExistingPromoter({
+      ...existingPromoter,
+      [name]: value,
+    });
+    props.onChange(existingPromoter);
+  };
+
   return (
     <FormControl fullWidth>
       <InputLabel id="existing-promoter">Promoter</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
-        value={existingPromoter}
         label="Promoter"
-        // onChange={handleChange}
+        name="promoter_id"
+        value={existingPromoter.id}
+        onChange={handleSelectChange}
       >
-        {/* {existingPromoters} */}
+        {isError && error.message}
+        {isSuccess &&
+          promoterData &&
+          promoterData.map((promoter) => (
+            <MenuItem key={promoter.id} value={promoter.id}>
+              {" "}
+              {promoter.name}{" "}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );
