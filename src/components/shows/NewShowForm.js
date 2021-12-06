@@ -143,6 +143,7 @@ const NewShowForm = () => {
           id="venue"
           name="venue"
           label="Venue"
+          value={showFormState.venue}
           onChange={handleChange}
           required
         />
