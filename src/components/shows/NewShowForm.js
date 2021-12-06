@@ -12,6 +12,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import { useAddShowMutation } from "../../features/shows/show-slice";
 
 const NewShowForm = () => {
   const [showFormState, setShowFormState] = useState({});
@@ -20,6 +21,7 @@ const NewShowForm = () => {
     date: new Date(),
     loadin: new Date(),
   });
+  const [submitShow, { data, isSuccess }] = useAddShowMutation();
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -67,16 +69,25 @@ const NewShowForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
       ...showFormState,
       ...timeAndDate,
-      promoter: {
+      user_id: 1,
+      promoter_attributes: {
         ...promoterFormState,
       },
     };
-    console.log(payload);
+    try {
+      const response = await submitShow(payload).unwrap();
+
+      console.log(response);
+
+      // navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -151,18 +162,19 @@ const NewShowForm = () => {
         />
         <TextField
           id="promoter-name"
-          name="promoter-name"
+          name="name"
           label="Promoter Name"
           onChange={handleChange}
         />
         <TextField
           id="promoter-email"
-          name="promoter-email"
+          name="email"
           label="Promoter email"
           onChange={handleChange}
         />
 
         <Button type="submit">Submit </Button>
+        {isSuccess && <p>Show successfully created!</p>}
       </Grid>
     </form>
   );
