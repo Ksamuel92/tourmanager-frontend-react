@@ -167,7 +167,7 @@ const NewShowForm = () => {
           <OutlinedInput
             id="guarantee"
             name="guarantee"
-            value={showFormState.guarantee}
+            value={showFormState.guarantee || ""}
             onChange={handleChange}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="Guarantee"
@@ -177,7 +177,7 @@ const NewShowForm = () => {
           <InputLabel htmlFor="merch">Merch</InputLabel>
           <OutlinedInput
             id="merch"
-            value={showFormState.merch}
+            value={showFormState.merch || ""}
             name="merch"
             onChange={handleChange}
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
