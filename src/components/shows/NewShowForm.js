@@ -9,6 +9,8 @@ import {
   Button,
   Select,
   MenuItem,
+  Switch,
+  FormGroup,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
@@ -26,7 +28,7 @@ const NewShowForm = () => {
     loadin: new Date(),
   });
   const [existingPromoter, setExistingPromoter] = useState("");
-  const [createNewPromoter, setCreateNewPromoter] = useState(true);
+  const [createNewPromoter, setCreateNewPromoter] = useState(false);
 
   const {
     data: promoterData,
@@ -54,7 +56,6 @@ const NewShowForm = () => {
   };
 
   const handleExistingPromoter = (e) => {
-    debugger;
     const { name, value } = e.target;
     setExistingPromoter({
       ...existingPromoter,
@@ -62,7 +63,12 @@ const NewShowForm = () => {
     });
   };
   const handleCheck = (e) => {
+    // debugger;
     const { name, checked } = e.target;
+    if (name === "new_promoter") {
+      setCreateNewPromoter(checked);
+      return;
+    }
     setShowFormState({
       ...showFormState,
       [name]: checked,
@@ -92,22 +98,40 @@ const NewShowForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = {
-      ...showFormState,
-      ...timeAndDate,
-      user_id: 1,
-      promoter_attributes: {
-        ...promoterFormState,
-      },
-    };
-    try {
-      const response = await submitShow(payload).unwrap();
+    if (createNewPromoter) {
+      const payload = {
+        ...showFormState,
+        ...timeAndDate,
+        user_id: 1, //TODO  set to current-user
+        promoter_attributes: {
+          ...promoterFormState,
+        },
+      };
+      try {
+        const response = await submitShow(payload).unwrap();
 
-      console.log(response);
+        console.log(response);
 
-      // navigate("/");
-    } catch (err) {
-      console.log(err);
+        // navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      const payload = {
+        ...showFormState,
+        ...timeAndDate,
+        ...existingPromoter,
+        user_id: 1, //TODO set to current-user
+      };
+      try {
+        const response = await submitShow(payload).unwrap();
+
+        console.log(response);
+
+        // navigate("/");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   // console.log(promoterData);
@@ -182,39 +206,57 @@ const NewShowForm = () => {
           label="Green Room"
           labelPlacement="start"
         />
-        <FormControl fullWidth>
-          <InputLabel id="existing-promoter">Promoter</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Promoter"
-            name="promoter_id"
-            value={existingPromoter.promoter_id || ""}
-            onChange={handleExistingPromoter}
-          >
-            {isError && error.message}
-            {isSuccess &&
-              promoterData &&
-              promoterData.map((promoter) => (
-                <MenuItem key={promoter.id} value={promoter.id}>
-                  {" "}
-                  {promoter.name}{" "}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-        <TextField
-          id="promoter-name"
-          name="name"
-          label="Promoter Name"
-          onChange={handleChange}
-        />
-        <TextField
-          id="promoter-email"
-          name="email"
-          label="Promoter email"
-          onChange={handleChange}
-        />
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={createNewPromoter}
+                onChange={handleCheck}
+                name="new_promoter"
+              />
+            }
+            label="Create New Promoter?"
+          />
+        </FormGroup>
+        {!createNewPromoter && (
+          <FormControl fullWidth>
+            <InputLabel id="existing-promoter">Promoter</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Promoter"
+              name="promoter_id"
+              value={existingPromoter.promoter_id || ""}
+              onChange={handleExistingPromoter}
+            >
+              {isError && error.message}
+              {isSuccess &&
+                promoterData &&
+                promoterData.map((promoter) => (
+                  <MenuItem key={promoter.id} value={promoter.id}>
+                    {" "}
+                    {promoter.name}{" "}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        )}
+        {createNewPromoter && (
+          <FormGroup row>
+            <TextField
+              id="promoter-name"
+              name="name"
+              label="Promoter Name"
+              onChange={handleChange}
+            />
+            <TextField
+              id="promoter-email"
+              name="email"
+              label="Promoter email"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        )}
 
         <Button type="submit">Submit </Button>
         {showSubmitted && <p>Show successfully created!</p>}
