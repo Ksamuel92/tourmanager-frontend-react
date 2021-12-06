@@ -7,7 +7,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
       providesTags: (result, error, arg) =>
         result
           ? [
-              ...result.map(({ slug }) => ({ type: "Promoter", slug })),
+              ...result.map(({ id }) => ({ type: "Promoter", id })),
               { type: "Promoter", id: "LIST" },
             ]
           : ["Promoter"],
