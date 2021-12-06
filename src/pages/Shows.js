@@ -1,5 +1,3 @@
-import ShowDetails from "../components/shows/ShowDetails";
-import NewShowForm from "../components/shows/NewShowForm";
 import ShowsList from "../components/shows/ShowsList";
 import { Link, Outlet } from "react-router-dom";
 const Shows = () => {
