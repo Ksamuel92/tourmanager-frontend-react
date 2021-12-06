@@ -35,8 +35,7 @@ function App() {
             <main>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="shows" element={<Shows />}>
-                  <Route path=":id" element={<ShowDetails />} />
+                <Route Route path="shows" element={<Shows />}>
                   <Route path="new" element={<NewShowForm />} />
                 </Route>
                 <Route path="promoters" element={<Promoters />}>
