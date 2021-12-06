@@ -1,17 +1,10 @@
-import {
-  Grid,
-  TextField,
-  FormControlLabel,
-  FormControl,
-  Button,
-} from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import useInput from "../../hooks/useInput";
 import { useSignUpMutation } from "../../features/auth/authEndpoints";
 import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const [signUpUser, { data, error, isLoading, isSuccess, isError }] =
-    useSignUpMutation();
+  const [signUpUser, object] = useSignUpMutation(); //TODO handle user object
   const navigate = useNavigate();
   const { value: name, bind: bindName, reset: resetName } = useInput("");
   const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
@@ -28,10 +21,9 @@ const SignUpForm = () => {
 
     try {
       const response = await signUpUser(formState).unwrap();
-
+      // TODO Confirm user auth works
       const { data: user } = response;
-      // console.log
-      navigate("/");
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
