@@ -6,6 +6,7 @@ import {
   InputAdornment,
   Checkbox,
   FormControlLabel,
+  Button,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
@@ -14,18 +15,27 @@ import Grid from "@mui/material/Grid";
 
 const NewShowForm = () => {
   const [showFormState, setShowFormState] = useState({});
+  const [promoterFormState, setPromoterFormState] = useState({});
   const [timeAndDate, setTimeAndDate] = useState({
     date: new Date(),
     loadin: new Date(),
   });
 
   const handleChange = (e) => {
-    debugger;
-    const { name, value } = e.target;
-    setShowFormState({
-      ...showFormState,
-      [name]: value,
-    });
+    const { name, value, id } = e.target;
+    const promoterFieldCheck = id.split("-")[0];
+    if (promoterFieldCheck === "promoter") {
+      setPromoterFormState({
+        ...promoterFormState,
+        [name]: value,
+      });
+      return;
+    }
+    if (name)
+      setShowFormState({
+        ...showFormState,
+        [name]: value,
+      });
   };
 
   const handleCheck = (e) => {
@@ -36,6 +46,7 @@ const NewShowForm = () => {
     });
   };
 
+  //TODO: REFACTOR MOMENTDATE And TIME
   const handleMomentDate = (e) => {
     if (e === null) {
       return;
@@ -56,8 +67,16 @@ const NewShowForm = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log(showFormState);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payload = {
+      ...showFormState,
+      ...timeAndDate,
+      promoter: {
+        ...promoterFormState,
+      },
+    };
+    console.log(payload);
   };
 
   return (
@@ -112,12 +131,14 @@ const NewShowForm = () => {
           id="wifi_network"
           name="wifi_network"
           label="Wifi Network"
+          onChange={handleChange}
           required
         />
         <TextField
           id="wifi_password"
           name="wifi_password"
           label="Wifi Password"
+          onChange={handleChange}
           required
         />
         <FormControlLabel
@@ -128,6 +149,20 @@ const NewShowForm = () => {
           label="Green Room"
           labelPlacement="start"
         />
+        <TextField
+          id="promoter-name"
+          name="promoter-name"
+          label="Promoter Name"
+          onChange={handleChange}
+        />
+        <TextField
+          id="promoter-email"
+          name="promoter-email"
+          label="Promoter email"
+          onChange={handleChange}
+        />
+
+        <Button type="submit">Submit </Button>
       </Grid>
     </form>
   );
