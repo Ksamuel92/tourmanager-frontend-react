@@ -1,4 +1,6 @@
 import React from "react";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./styles/Theme";
 import "./App.css";
 import Shows from "./pages/Shows";
 import NewShowForm from "./components/shows/NewShowForm";
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <CssBaseline />
         <div className={classes.root}>
@@ -47,7 +49,7 @@ function App() {
           </Layout>
         </div>
       </LocalizationProvider>
-    </div>
+    </ThemeProvider>
   );
 }
 
