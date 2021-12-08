@@ -44,6 +44,7 @@ function App() {
                   <Route path="new" element={<NewPromoterForm />} />
                 </Route>
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/user" />
               </Routes>
             </main>
           </Layout>
