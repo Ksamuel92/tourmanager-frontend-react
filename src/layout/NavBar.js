@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useScrollTrigger } from "@mui/material";
 import { Tabs, Tab } from "@material-ui/core";
+import ButtonUnstyled from "@mui/base/ButtonUnstyled";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -63,11 +64,9 @@ const NavBar = () => {
       <ElevationScroll>
         <AppBar position="fixed" color="primary">
           <Toolbar>
-            <Button>
-              <Typography variant="h6" className={classes.title}>
-                TourManager
-              </Typography>
-            </Button>
+            <Typography variant="h6" component="h1">
+              TourManager
+            </Typography>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -78,18 +77,21 @@ const NavBar = () => {
                 label="Home"
                 component={NavLink}
                 to="/"
+                disableRipple
               />
               <Tab
                 className={classes.tab}
                 label="Shows"
                 component={NavLink}
                 to="/shows"
+                disableRipple
               />
               <Tab
                 className={classes.tab}
                 label="Promoters"
                 component={NavLink}
                 to="/promoters"
+                disableRipple
               />
               {/* <Tab className={classes.tab} label="Schedule" component={Link}/> */}
               {/* <Tab
