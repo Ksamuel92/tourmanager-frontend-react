@@ -6,7 +6,9 @@ export const tourManagerApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001/",
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
+      debugger;
+      const token = getState().authReducer.token;
+      console.log(token);
 
       if (token) {
         headers.set("authorization", `${token}`);
