@@ -23,7 +23,7 @@ const SignUpForm = () => {
       const response = await signUpUser(formState).unwrap();
       // TODO Confirm user auth works
       const { data: user } = response;
-      console.log(user);
+      navigate("/shows");
     } catch (err) {
       console.log(err);
     }
