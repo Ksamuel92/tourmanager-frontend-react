@@ -46,7 +46,7 @@ const NavBar = () => {
   return (
     <div className={classes.root}>
       <ElevationScroll>
-        <AppBar position="fixed">
+        <AppBar position="fixed" color="primary">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               TourManager
@@ -66,6 +66,7 @@ const NavBar = () => {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
+      <Toolbar />
     </div>
   );
 };
