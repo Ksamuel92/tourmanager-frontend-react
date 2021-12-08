@@ -4,7 +4,7 @@ import { useSignUpMutation } from "../../features/auth/authEndpoints";
 import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const [signUpUser, object] = useSignUpMutation(); //TODO handle user object
+  const [signUpUser, { data, isSuccess, isError, error }] = useSignUpMutation(); //TODO handle user object
   const navigate = useNavigate();
   const { value: name, bind: bindName, reset: resetName } = useInput("");
   const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
@@ -22,8 +22,11 @@ const SignUpForm = () => {
     try {
       const response = await signUpUser(formState).unwrap();
       // TODO Confirm user auth works
-      const { data: user } = response;
-      navigate("/shows");
+
+      debugger;
+      if (response.status.code === 200) {
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
     }
