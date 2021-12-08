@@ -5,7 +5,6 @@ import "./App.css";
 import Shows from "./pages/Shows";
 import NewShowForm from "./components/shows/NewShowForm";
 import Promoters from "./pages/Promoters";
-import PromoterDetails from "./components/promoters/PromoterDetails";
 import NewPromoterForm from "./components/promoters/NewPromoterForm";
 import Auth from "./pages/Auth";
 import { Routes, Route } from "react-router-dom";
@@ -15,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const userToken = useSelector((store) => store.authReducer.token);
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={DateAdapter}>
@@ -36,12 +37,24 @@ function App() {
             <main>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route Route path="shows" element={<Shows />}>
-                  <Route path="new" element={<NewShowForm />} />
+                <Route
+                  Route
+                  path="shows"
+                  element={userToken ? <Shows /> : <Auth />}
+                >
+                  <Route
+                    path="new"
+                    element={userToken ? <NewShowForm /> : <Auth />}
+                  />
                 </Route>
-                <Route path="promoters" element={<Promoters />}>
-                  <Route path=":slug" element={<PromoterDetails />} />
-                  <Route path="new" element={<NewPromoterForm />} />
+                <Route
+                  path="promoters"
+                  element={userToken ? <Promoters /> : <Auth />}
+                >
+                  <Route
+                    path="new"
+                    element={userToken ? <NewPromoterForm /> : <Auth />}
+                  />
                 </Route>
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/user" />
