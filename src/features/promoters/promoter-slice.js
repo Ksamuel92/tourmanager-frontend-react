@@ -4,17 +4,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     getPromoters: builder.query({
       query: () => "promoters",
-      providesTags: (result, error, arg) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Promoter", id })),
-              { type: "Promoter", id: "LIST" },
-            ]
-          : ["Promoter"],
-    }),
-    getPromoterBySlug: builder.query({
-      query: (slug) => `promoters/${slug}`,
-      providesTags: (result, error, slug) => [{ type: "Promoter", slug }],
+      providesTags: ["Promoter"],
     }),
     addPromoter: builder.mutation({
       query: (body) => ({
@@ -22,7 +12,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Promoter", id: "LIST" }],
+      invalidatesTags: ["Promoter"],
     }),
     editPromoter: builder.mutation({
       query: (body) => ({
@@ -30,14 +20,14 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Promoter", id }],
+      invalidatesTags: ["Promoter"],
     }),
     deletePromoter: builder.mutation({
       query: (id) => ({
         url: `promoters/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Promoter", id }],
+      invalidatesTags: ["Promoter"],
     }),
   }),
   overrideExisting: false,
