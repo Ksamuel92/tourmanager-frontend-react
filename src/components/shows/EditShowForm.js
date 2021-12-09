@@ -14,6 +14,7 @@ import TimePicker from "@mui/lab/TimePicker";
 import { useState } from "react";
 import { useEditShowMutation } from "../../features/shows/show-slice";
 import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
 
 const EditShowForm = (props) => {
   const {
@@ -45,6 +46,7 @@ const EditShowForm = (props) => {
     date,
     loadin,
   });
+  const user = useSelector((store) => store.authReducer.user);
 
   const [editShow, object] = useEditShowMutation(); //TODO: Extract object with loading
 
@@ -89,7 +91,7 @@ const EditShowForm = (props) => {
     const payload = {
       ...editShowFormState,
       ...timeAndDate,
-      user_id: 1, //TODO  set to current-user
+      user_id: user.id, //TODO  set to current-user
       promoter_id: promoter.id,
     };
     try {
