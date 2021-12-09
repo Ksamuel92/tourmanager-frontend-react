@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useScrollTrigger } from "@mui/material";
 import { Tabs, Tab } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -43,7 +44,7 @@ const NavBar = () => {
   const [value, setValue] = useState(0);
   const classes = useStyles();
   const location = useLocation();
-
+  const userToken = useSelector((store) => store.authReducer.token);
   useEffect(() => {
     if (location.pathname === "/" && value !== 0) {
       setValue(0);
@@ -77,25 +78,22 @@ const NavBar = () => {
                 component={NavLink}
                 to="/"
               />
-              <Tab
-                className={classes.tab}
-                label="Shows"
-                component={NavLink}
-                to="/shows"
-              />
-              <Tab
-                className={classes.tab}
-                label="Promoters"
-                component={NavLink}
-                to="/promoters"
-              />
-              {/* <Tab className={classes.tab} label="Schedule" component={Link}/> */}
-              {/* <Tab
-                className={classes.tab}
-                label="User Profile"
-                component={Link}
-              />
-              Calendar Page */}
+              {userToken
+                ? [
+                    <Tab
+                      className={classes.tab}
+                      label="Shows"
+                      component={NavLink}
+                      to="/shows"
+                    />,
+                    <Tab
+                      className={classes.tab}
+                      label="Promoters"
+                      component={NavLink}
+                      to="/promoters"
+                    />,
+                  ]
+                : null}
             </Tabs>
             <Link to={"auth"} className={classes.login}>
               <Button color="inherit">Login</Button>
