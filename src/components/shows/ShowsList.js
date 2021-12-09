@@ -1,8 +1,12 @@
 import { useGetShowsQuery } from "../../features/shows/show-slice";
 import ShowDetails from "../shows/ShowDetails";
+import { useSelector } from "react-redux";
 
 const ShowsList = () => {
-  const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery();
+  const { id } = useSelector((store) => store.authReducer.user);
+  const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
+    refetchOnMountOrArgChange: true,
+  });
   return (
     <div>
       {isLoading && "Loading..."}
