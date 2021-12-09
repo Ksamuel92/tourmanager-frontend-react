@@ -26,7 +26,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     editPromoter: builder.mutation({
       query: (body) => ({
-        url: `promoters/${body.slug}`,
+        url: `promoters/${body.id}`,
         method: "PATCH",
         body,
       }),
