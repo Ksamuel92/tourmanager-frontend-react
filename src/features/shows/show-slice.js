@@ -3,18 +3,8 @@ import { tourManagerApi } from "../../services/api";
 const showApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     getShows: builder.query({
-      query: () => "shows",
-      providesTags: (result, error, arg) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "Show", id })),
-              { type: "Show", id: "LIST" },
-            ]
-          : ["Show"],
-    }),
-    getShowById: builder.query({
-      query: (id) => `shows/${id}`,
-      providesTags: (result, error, id) => [{ type: "Show", id }],
+      query: (id) => "shows",
+      providesTags: ["Show"],
     }),
     addShow: builder.mutation({
       query: (body) => ({
@@ -22,7 +12,7 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Show", id: "LIST" }],
+      invalidatesTags: ["Show"],
     }),
     editShow: builder.mutation({
       query: (body) => ({
@@ -30,14 +20,14 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Show", id }],
+      invalidatesTags: ["Show"],
     }),
     deleteShow: builder.mutation({
       query: (id) => ({
         url: `shows/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Show", id }],
+      invalidatesTags: ["Show"],
     }),
   }),
   overrideExisting: false,
@@ -45,7 +35,6 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
 
 export const {
   useGetShowsQuery,
-  usegetShowByIdQuery,
   useAddShowMutation,
   useEditShowMutation,
   useDeleteShowMutation,
