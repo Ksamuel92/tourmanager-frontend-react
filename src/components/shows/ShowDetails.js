@@ -5,11 +5,18 @@ import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import ShowFormModal from "./ShowFormModal";
 import { useState } from "react";
+import { useDeleteShowMutation } from "../../features/shows/show-slice";
 
 const ShowDetails = (props) => {
-  const { venue, date, loadin, guarantee, merch, green_room, wifi } =
+  const { venue, date, loadin, guarantee, merch, green_room, wifi, id } =
     props.show;
   const [open, setOpen] = useState(false);
+  const [deleteShow, { isSuccess, isError }] = useDeleteShowMutation();
+
+  const handleDelete = async (e) => {
+    const response = deleteShow(id);
+    console.log(response);
+  };
 
   const handleClickOpen = (e) => {
     setOpen(true);
@@ -47,8 +54,7 @@ const ShowDetails = (props) => {
         <Button size="small" onClick={handleClickOpen}>
           Edit
         </Button>
-        <Button size="small" onClick={handleClickOpen}>
-          {" "}
+        <Button size="small" onClick={handleDelete}>
           Delete
         </Button>
       </CardActions>
