@@ -1,5 +1,5 @@
 import { tourManagerApi } from "../../services/api";
-import { setCredentials } from "../../features/auth/authSlice";
+import { setCredentials, logoutUser } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export const authApiEndpoints = tourManagerApi.injectEndpoints({
@@ -11,17 +11,17 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
         body: credentials,
       }),
       async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
-        const navigate = useNavigate;
         try {
           const { data, meta } = await queryFulfilled;
-          //onSuccess side-effect
           const headers = meta.response.headers;
           const token = headers.get("Authorization");
-          dispatch(setCredentials({ data, token }));
-          navigate("/shows");
+          const user = data.data;
+
+          dispatch(setCredentials({ user, token }));
         } catch (err) {
           //onError side-effect
           // TODO: Handle error message here
+          console.log(err);
         }
       },
     }),
@@ -36,9 +36,11 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           const { data, meta } = await queryFulfilled;
           const headers = meta.response.headers;
           const token = headers.get("Authorization");
-          dispatch(setCredentials({ data, token }));
+          const user = data.data;
+          dispatch(setCredentials({ user, token }));
         } catch (err) {
           //TODO: Handle Error message
+          console.log(err);
         }
       },
     }),
@@ -47,6 +49,18 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
         url: "logout",
         method: "DELETE",
       }),
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        try {
+          const { data, meta } = await queryFulfilled;
+
+          if (meta.response.ok) {
+            dispatch(logoutUser());
+          }
+        } catch (err) {
+          //TODO: Handle Error Message
+          console.log(err);
+        }
+      },
     }),
     currentUser: builder.query({
       query: () => "current_user",
