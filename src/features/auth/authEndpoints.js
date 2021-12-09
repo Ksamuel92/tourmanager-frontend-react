@@ -24,6 +24,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           console.log(err);
         }
       },
+      inValidateTags: ["Show", "Promoter"],
     }),
     login: builder.mutation({
       query: (credentials) => ({
@@ -43,6 +44,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           console.log(err);
         }
       },
+      inValidateTags: ["Show", "Promoter"],
     }),
     logout: builder.mutation({
       query: () => ({
@@ -61,6 +63,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           console.log(err);
         }
       },
+      inValidateTags: ["Show", "Promoter"],
     }),
     currentUser: builder.query({
       query: () => "current_user",
