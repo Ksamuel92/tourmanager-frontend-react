@@ -7,7 +7,6 @@ export const tourManagerApi = createApi({
     baseUrl: "http://localhost:3001/",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authReducer.token;
-      console.log(token);
 
       if (token) {
         headers.set("authorization", `${token}`);
