@@ -2,10 +2,16 @@ import { TextField, Button } from "@material-ui/core";
 import useInput from "../../hooks/useInput";
 import { useSignUpMutation } from "../../features/auth/authEndpoints";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Typography from "@mui/material/Typography";
 
 const SignUpForm = () => {
-  const [signUpUser, { data, isSuccess, isError, error }] = useSignUpMutation(); //TODO handle user object
+  const [signUpUser] = useSignUpMutation(); //TODO handle user object
   const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState(false);
   const { value: name, bind: bindName, reset: resetName } = useInput("");
   const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
   const {
@@ -16,12 +22,15 @@ const SignUpForm = () => {
 
   const formState = { user: { name, email, password } };
 
+  const handleSwitch = () => {
+    setLoginForm(!loginForm);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await signUpUser(formState).unwrap();
-      // TODO Confirm user auth works
 
       debugger;
       if (response.status.code === 200) {
@@ -33,32 +42,41 @@ const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        id="name-input"
-        name="name"
-        label="Name"
-        type="text"
-        {...bindName}
-      />
-      <TextField
-        id="email-input"
-        name="email"
-        label="Email"
-        type="email"
-        {...bindEmail}
-      />
-      <TextField
-        id="password-input"
-        name="password"
-        label="Password"
-        type="password"
-        {...bindPassword}
-      />
-      <Button type="submit" variant="contained">
-        Submit
-      </Button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        {loginForm ? null : (
+          <TextField
+            id="name-input"
+            name="name"
+            label="Name"
+            type="text"
+            {...bindName}
+          />
+        )}
+        <TextField
+          id="email-input"
+          name="email"
+          label="Email"
+          type="email"
+          {...bindEmail}
+        />
+        <TextField
+          id="password-input"
+          name="password"
+          label="Password"
+          type="password"
+          {...bindPassword}
+        />
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </form>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Typography>Sign Up</Typography>
+        <Switch onChange={handleSwitch} />
+        <Typography>Login</Typography>
+      </Stack>
+    </div>
   );
 };
 
