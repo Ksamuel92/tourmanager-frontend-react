@@ -18,6 +18,7 @@ import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";
 import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
+import { useSelector } from "react-redux";
 // import ExistingPromoterFields from "../promoters/ExistingPromoterFields";
 
 const NewShowForm = () => {
@@ -29,6 +30,7 @@ const NewShowForm = () => {
   });
   const [existingPromoter, setExistingPromoter] = useState("");
   const [createNewPromoter, setCreateNewPromoter] = useState(false);
+  const user = useSelector((store) => store.authReducer.user);
 
   const {
     data: promoterData,
@@ -102,7 +104,7 @@ const NewShowForm = () => {
       const payload = {
         ...showFormState,
         ...timeAndDate,
-        user_id: 1, //TODO  set to current-user
+        user_id: user.id,
         promoter_attributes: {
           ...promoterFormState,
         },
@@ -121,7 +123,7 @@ const NewShowForm = () => {
         ...showFormState,
         ...timeAndDate,
         ...existingPromoter,
-        user_id: 1, //TODO set to current-user
+        user_id: user.id,
       };
       try {
         const response = await submitShow(payload).unwrap();
