@@ -1,6 +1,9 @@
 import { TextField, Button } from "@material-ui/core";
 import useInput from "../../hooks/useInput";
-import { useSignUpMutation } from "../../features/auth/authEndpoints";
+import {
+  useSignUpMutation,
+  useLoginMutation,
+} from "../../features/auth/authEndpoints";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Switch from "@mui/material/Switch";
@@ -10,6 +13,7 @@ import Typography from "@mui/material/Typography";
 
 const SignUpForm = () => {
   const [signUpUser] = useSignUpMutation(); //TODO handle user object
+  const [loginUser] = useLoginMutation();
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState(false);
   const { value: name, bind: bindName, reset: resetName } = useInput("");
@@ -20,8 +24,6 @@ const SignUpForm = () => {
     reset: resetPassword,
   } = useInput("");
 
-  const formState = { user: { name, email, password } };
-
   const handleSwitch = () => {
     setLoginForm(!loginForm);
   };
@@ -29,15 +31,26 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await signUpUser(formState).unwrap();
-
-      debugger;
-      if (response.status.code === 200) {
-        navigate("/");
+    if (!loginForm) {
+      try {
+        const signUpFormState = { user: { name, email, password } };
+        const response = await signUpUser(signUpFormState).unwrap();
+        if (response.status.code === 200) {
+          navigate("/shows");
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else if (loginForm) {
+      try {
+        const loginFormState = { user: { email, password } };
+        const response = await loginUser(loginFormState).unwrap();
+        if (response.status.code === 200) {
+          navigate("/shows");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
