@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 
-const SignUpForm = () => {
+const AuthForm = () => {
   const [signUpUser] = useSignUpMutation(); //TODO handle user object
   const [loginUser] = useLoginMutation();
   const navigate = useNavigate();
@@ -93,4 +93,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default AuthForm;
