@@ -5,6 +5,7 @@ export const tourManagerApi = createApi({
   reducerPath: "tourManagerApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3001/",
+    refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authReducer.token;
 
@@ -14,6 +15,6 @@ export const tourManagerApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Show", "User", "Promoter", "UNAUTHORIZED", "LIST"],
+  tagTypes: ["Show", "Promoter"],
   endpoints: () => ({}),
 });
