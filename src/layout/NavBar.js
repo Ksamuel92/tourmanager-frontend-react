@@ -8,6 +8,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { useScrollTrigger } from "@mui/material";
 import { Tabs, Tab } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useLogoutMutation } from "../features/auth/authEndpoints";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -42,9 +44,13 @@ function ElevationScroll(props) {
 
 const NavBar = () => {
   const [value, setValue] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
   const classes = useStyles();
   const location = useLocation();
+  const navigate = useNavigate();
   const userToken = useSelector((store) => store.authReducer.token);
+  const [logoutUser] = useLogoutMutation();
+
   useEffect(() => {
     if (location.pathname === "/" && value !== 0) {
       setValue(0);
@@ -55,10 +61,29 @@ const NavBar = () => {
     }
   }, [value, location]);
 
+  useEffect(() => {
+    if (userToken) {
+      setLoggedIn(true);
+    } else if (userToken === null) {
+      setLoggedIn(false);
+    }
+  }, [userToken]);
+
   const handleChange = (e, value) => {
     setValue(value);
   };
 
+  const handleLogout = async (e) => {
+    try {
+      const response = await logoutUser().unwrap();
+      if (response.status === 200) {
+        navigate("/");
+        setLoggedIn(false);
+      }
+    } catch (err) {
+      console.log(err); //handle error
+    }
+  };
   return (
     <div sx={{ flexGrow: 1 }}>
       <ElevationScroll>
@@ -78,26 +103,33 @@ const NavBar = () => {
                 component={NavLink}
                 to="/"
               />
-              {userToken
-                ? [
-                    <Tab
-                      className={classes.tab}
-                      label="Shows"
-                      component={NavLink}
-                      to="/shows"
-                    />,
-                    <Tab
-                      className={classes.tab}
-                      label="Promoters"
-                      component={NavLink}
-                      to="/promoters"
-                    />,
-                  ]
-                : null}
+              {loggedIn && (
+                <Tab
+                  className={classes.tab}
+                  label="Shows"
+                  component={NavLink}
+                  to="/shows"
+                />
+              )}
+              {loggedIn && (
+                <Tab
+                  className={classes.tab}
+                  label="Promoters"
+                  component={NavLink}
+                  to="/promoters"
+                  key={2}
+                />
+              )}
             </Tabs>
-            <Link to={"auth"} className={classes.login}>
-              <Button color="inherit">Login</Button>
-            </Link>
+            {loggedIn ? (
+              <Button color="inherit" onClick={handleLogout}>
+                Logout
+              </Button>
+            ) : (
+              <Link to={"auth"} className={classes.login}>
+                <Button color="inherit">Login</Button>
+              </Link>
+            )}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
