@@ -14,7 +14,7 @@ const ShowFormModal = (props) => {
     <Dialog open={props.open} onClose={props.handleClose}>
       <DialogTitle>Edit Show</DialogTitle>
       <DialogContent>
-        <DialogContentText>Edit Your Show</DialogContentText>
+        <DialogContentText></DialogContentText>
         <EditShowForm
           show={props.show}
           open={props.open}
