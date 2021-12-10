@@ -11,6 +11,7 @@ import {
   MenuItem,
   Switch,
   FormGroup,
+  Container,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
@@ -19,6 +20,9 @@ import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";
 import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
 import { useSelector } from "react-redux";
+import { Typography } from "@material-ui/core";
+import { Fragment } from "react";
+import Alert from "@mui/material/Alert";
 // import ExistingPromoterFields from "../promoters/ExistingPromoterFields";
 
 const NewShowForm = () => {
@@ -38,7 +42,10 @@ const NewShowForm = () => {
     isSuccess,
     isError,
   } = useGetPromotersQuery();
-  const [submitShow, { isSuccess: showSubmitted }] = useAddShowMutation();
+  const [
+    submitShow,
+    { isSuccess: showSubmitted, isError: addShowHasError, error: addShowError },
+  ] = useAddShowMutation();
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -136,135 +143,183 @@ const NewShowForm = () => {
       }
     }
   };
-  // console.log(promoterData);
+
+  console.log(addShowError);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid spacing={3}>
-        <TextField
-          id="venue"
-          name="venue"
-          label="Venue"
-          value={showFormState.venue || ""}
-          onChange={handleChange}
-          required
-        />
-        <DatePicker
-          name="date"
-          className="date"
-          label="Date"
-          value={showFormState.date}
-          onChange={handleMomentDate}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        <TimePicker
-          name="loadin"
-          className="loadin"
-          label="Load In"
-          value={showFormState.loadin}
-          onChange={handleMomentTime}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        <FormControl>
-          <InputLabel htmlFor="guarantee">Guarantee</InputLabel>
-          <OutlinedInput
-            id="guarantee"
-            name="guarantee"
-            value={showFormState.guarantee || ""}
-            onChange={handleChange}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            label="Guarantee"
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="merch">Merch</InputLabel>
-          <OutlinedInput
-            id="merch"
-            value={showFormState.merch || ""}
-            name="merch"
-            onChange={handleChange}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            label="Merch"
-          />
-        </FormControl>
-        <TextField
-          id="wifi_network"
-          name="wifi_network"
-          label="Wifi Network"
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          id="wifi_password"
-          name="wifi_password"
-          label="Wifi Password"
-          onChange={handleChange}
-          required
-        />
-        <FormControlLabel
-          name="green_room"
-          checked={showFormState.green_room || false}
-          onChange={handleCheck}
-          control={<Checkbox />}
-          label="Green Room"
-          labelPlacement="start"
-        />
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={createNewPromoter}
-                onChange={handleCheck}
-                name="new_promoter"
-              />
-            }
-            label="Create New Promoter?"
-          />
-        </FormGroup>
-        {!createNewPromoter && (
-          <FormControl fullWidth>
-            <InputLabel id="existing-promoter">Promoter</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Promoter"
-              name="promoter_id"
-              value={existingPromoter.promoter_id || ""}
-              onChange={handleExistingPromoter}
-            >
-              {isError && error.message}
-              {isSuccess &&
-                promoterData &&
-                promoterData.map((promoter) => (
-                  <MenuItem key={promoter.id} value={promoter.id}>
-                    {" "}
-                    {promoter.name}{" "}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-        )}
-        {createNewPromoter && (
-          <FormGroup row>
-            <TextField
-              id="promoter-name"
-              name="name"
-              label="Promoter Name"
-              onChange={handleChange}
-            />
-            <TextField
-              id="promoter-email"
-              name="email"
-              label="Promoter email"
-              onChange={handleChange}
-            />
-          </FormGroup>
-        )}
+    <Fragment>
+      {addShowHasError && (
+        <Alert severity="error">
+          {" "}
+          {"promoter" in addShowError.data.error
+            ? "You must provide a promoter or create one"
+            : "Something went wrong. Try again."}
+        </Alert>
+      )}
+      <Typography variant="h5" align="center" sx>
+        Create New Show
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Container sx={{ marginTop: "30px" }}>
+          <Grid
+            spacing={1}
+            container
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Grid item row xs={12}>
+              <div>
+                <TextField
+                  id="venue"
+                  name="venue"
+                  label="Venue"
+                  value={showFormState.venue || ""}
+                  onChange={handleChange}
+                  required
+                />{" "}
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <FormGroup row>
+                <DatePicker
+                  name="date"
+                  className="date"
+                  label="Date"
+                  value={showFormState.date}
+                  onChange={handleMomentDate}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <TimePicker
+                  name="loadin"
+                  className="loadin"
+                  label="Load In"
+                  value={showFormState.loadin}
+                  onChange={handleMomentTime}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </FormGroup>
+            </Grid>
+            <Grid item xs={12}>
+              <FormGroup row>
+                <FormControl>
+                  <InputLabel htmlFor="guarantee">Guarantee</InputLabel>
+                  <OutlinedInput
+                    id="guarantee"
+                    name="guarantee"
+                    value={showFormState.guarantee || ""}
+                    onChange={handleChange}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    label="Guarantee"
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel htmlFor="merch">Merch</InputLabel>
+                  <OutlinedInput
+                    id="merch"
+                    value={showFormState.merch || ""}
+                    name="merch"
+                    onChange={handleChange}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    label="Merch"
+                  />
+                </FormControl>
+              </FormGroup>
+            </Grid>
+            <Grid item xs={12}>
+              <FormGroup>
+                <TextField
+                  id="wifi_network"
+                  name="wifi_network"
+                  label="Wifi Network"
+                  onChange={handleChange}
+                  required
+                />
+                <TextField
+                  id="wifi_password"
+                  name="wifi_password"
+                  label="Wifi Password"
+                  onChange={handleChange}
+                  required
+                />
+              </FormGroup>
+            </Grid>
 
-        <Button type="submit">Submit </Button>
-        {showSubmitted && <p>Show successfully created!</p>}
-      </Grid>
-    </form>
+            <FormControlLabel
+              name="green_room"
+              checked={showFormState.green_room || false}
+              onChange={handleCheck}
+              control={<Checkbox />}
+              label="Green Room"
+              labelPlacement="start"
+            />
+
+            <Grid item xs={12}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={createNewPromoter}
+                      onChange={handleCheck}
+                      name="new_promoter"
+                    />
+                  }
+                  label="Create New Promoter?"
+                />
+              </FormGroup>
+            </Grid>
+            {!createNewPromoter && (
+              <FormControl fullWidth>
+                <InputLabel id="existing-promoter">Promoter</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Promoter"
+                  name="promoter_id"
+                  value={existingPromoter.promoter_id || ""}
+                  onChange={handleExistingPromoter}
+                >
+                  {isError && error.message}
+                  {isSuccess &&
+                    promoterData &&
+                    promoterData.map((promoter) => (
+                      <MenuItem key={promoter.id} value={promoter.id}>
+                        {" "}
+                        {promoter.name} -{promoter.email}{" "}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            )}
+            {createNewPromoter && (
+              <Grid item xs={12}>
+                <FormGroup row>
+                  <TextField
+                    id="promoter-name"
+                    name="name"
+                    label="Promoter Name"
+                    onChange={handleChange}
+                  />
+                  <TextField
+                    id="promoter-email"
+                    name="email"
+                    label="Promoter Email"
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+              </Grid>
+            )}
+
+            <Button type="submit">Submit </Button>
+            {showSubmitted && <p>Show successfully created!</p>}
+          </Grid>
+        </Container>
+      </form>
+    </Fragment>
   );
 };
 
