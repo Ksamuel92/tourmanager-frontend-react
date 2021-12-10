@@ -20,7 +20,7 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: ["Show"],
+      invalidatesTags: ["Show", "Promoter"],
     }),
     deleteShow: builder.mutation({
       query: (id) => ({
