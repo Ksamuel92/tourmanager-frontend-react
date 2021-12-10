@@ -15,6 +15,7 @@ import { CssBaseline } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
+import ErrorBoundary from "./layout/ErrorBoundary";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,30 +36,32 @@ function App() {
         <div className={classes.root}>
           <Layout>
             <main>
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route
-                  Route
-                  path="shows"
-                  element={userToken ? <Shows /> : <Auth />}
-                >
+              <ErrorBoundary>
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
                   <Route
-                    path="new"
-                    element={userToken ? <NewShowForm /> : <Auth />}
-                  />
-                </Route>
-                <Route
-                  path="promoters"
-                  element={userToken ? <Promoters /> : <Auth />}
-                >
+                    Route
+                    path="shows"
+                    element={userToken ? <Shows /> : <Auth />}
+                  >
+                    <Route
+                      path="new"
+                      element={userToken ? <NewShowForm /> : <Auth />}
+                    />
+                  </Route>
                   <Route
-                    path="new"
-                    element={userToken ? <NewPromoterForm /> : <Auth />}
-                  />
-                </Route>
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/user" />
-              </Routes>
+                    path="promoters"
+                    element={userToken ? <Promoters /> : <Auth />}
+                  >
+                    <Route
+                      path="new"
+                      element={userToken ? <NewPromoterForm /> : <Auth />}
+                    />
+                  </Route>
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/user" />
+                </Routes>
+              </ErrorBoundary>
             </main>
           </Layout>
         </div>
