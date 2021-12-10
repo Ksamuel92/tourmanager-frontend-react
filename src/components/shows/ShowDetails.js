@@ -24,7 +24,7 @@ const ShowDetails = (props) => {
   };
   const handleCloseDeleteDialog = (e) => {
     setOpenDeleteDialog(false);
-  }
+  };
 
   const handleClickOpen = (e) => {
     setOpen(true);
