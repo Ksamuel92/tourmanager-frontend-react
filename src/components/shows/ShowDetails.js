@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import ShowFormModal from "./ShowFormModal";
-import ConfirmationDialog from "../../Layout/ConfirmationDialog";
+import ConfirmationDialog from "../../layout/ConfirmationDialog";
 import { useState } from "react";
 import { useDeleteShowMutation } from "../../features/shows/show-slice";
 
