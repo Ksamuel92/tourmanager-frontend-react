@@ -35,8 +35,8 @@ const EditShowForm = (props) => {
   const [editShowFormState, setEditShowFormState] = useState({
     id,
     venue,
-    guarantee,
-    merch,
+    guarantee: parseFloat(guarantee).toFixed(2),
+    merch: parseFloat(merch).toFixed(2),
     green_room,
     wifi_network,
     wifi_password,
