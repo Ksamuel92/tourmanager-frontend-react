@@ -23,9 +23,11 @@ import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { Fragment } from "react";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 // import ExistingPromoterFields from "../promoters/ExistingPromoterFields";
 
 const NewShowForm = () => {
+  const navigate = useNavigate();
   const [showFormState, setShowFormState] = useState({});
   const [promoterFormState, setPromoterFormState] = useState({});
   const [timeAndDate, setTimeAndDate] = useState({
@@ -107,8 +109,9 @@ const NewShowForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let payload;
     if (createNewPromoter) {
-      const payload = {
+      payload = {
         ...showFormState,
         ...timeAndDate,
         user_id: user.id,
@@ -116,35 +119,17 @@ const NewShowForm = () => {
           ...promoterFormState,
         },
       };
-      try {
-        const response = await submitShow(payload).unwrap();
-
-        console.log(response);
-
-        // navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
     } else {
-      const payload = {
+      payload = {
         ...showFormState,
         ...timeAndDate,
         ...existingPromoter,
         user_id: user.id,
       };
-      try {
-        const response = await submitShow(payload).unwrap();
-
-        console.log(response);
-
-        // navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
     }
+    submitShow(payload);
+    navigate("/shows/list", { state: showSubmitted });
   };
-
-  console.log(addShowError);
 
   return (
     <Fragment>
@@ -315,7 +300,6 @@ const NewShowForm = () => {
             )}
 
             <Button type="submit">Submit </Button>
-            {showSubmitted && <p>Show successfully created!</p>}
           </Grid>
         </Container>
       </form>
