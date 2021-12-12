@@ -8,14 +8,14 @@ import Promoters from "./pages/Promoters";
 import NewPromoterForm from "./components/promoters/NewPromoterForm";
 import Auth from "./pages/Auth";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./layout/Layout";
+import Layout from "./Layout/Layout";
 import LandingPage from "./pages/LandingPage";
 import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
-import ErrorBoundary from "./layout/ErrorBoundary";
+import ErrorBoundary from "./Layout/ErrorBoundary";
 import ShowsList from "./components/shows/ShowsList";
 import ShowLandingPage from "./components/shows/ShowLandingPage";
 
@@ -47,10 +47,6 @@ function App() {
                   >
                     <Route
                       path="/shows/"
-                      element={userToken ? <ShowLandingPage /> : <Auth />}
-                    />
-                    <Route
-                      path="/shows/list"
                       element={userToken ? <ShowsList /> : <Auth />}
                     />
                     <Route
