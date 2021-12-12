@@ -218,7 +218,7 @@ const EditShowForm = (props) => {
             />
           </FormGroup>
 
-          <Button type="submit">Submit </Button>
+          <Button type="submit">Edit Show </Button>
         </Grid>
       </form>
     </Fragment>
