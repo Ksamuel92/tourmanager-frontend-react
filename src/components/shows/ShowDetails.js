@@ -1,15 +1,17 @@
 import { Typography, Button } from "@material-ui/core";
 import CardMedia from "@mui/material/CardMedia";
+import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import ShowFormModal from "./ShowFormModal";
-import ConfirmationDialog from "../../layout/ConfirmationDialog";
+import ConfirmationDialog from "../../Layout/ConfirmationDialog";
 import Moment from "react-moment";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
+import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
+import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -26,6 +28,8 @@ const ShowDetails = (props) => {
     props.show;
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [checked, setChecked] = useState(false);
+
   const [deleteShow, { isSuccess, isError }] = useDeleteShowMutation();
   // debugger;
 
@@ -40,6 +44,9 @@ const ShowDetails = (props) => {
     setOpenDeleteDialog(false);
   };
 
+  const handleClick = () => {
+    setChecked((prev) => !prev);
+  };
   const handleClickOpen = (e) => {
     setOpen(true);
   };
@@ -49,80 +56,95 @@ const ShowDetails = (props) => {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        width="140"
-        image={
-          process.env.PUBLIC_URL +
-          "/assets/magnus-lunay-B1CWLBWEHHI-unsplash.jpg"
-        }
-        title="Contemplative Reptile"
-      />
-      <CardContent>
-        <Typography variant="h6">
-          {venue} - {city}
-          <Divider />
-          <Moment format="MM/DD/YYYY">{date}</Moment>-{" "}
-          <Moment format="hh:mm">{loadin}</Moment>
+      <CardActionArea onClick={handleClick}>
+        <CardMedia
+          component="img"
+          height="140"
+          width="140"
+          image={
+            process.env.PUBLIC_URL +
+            "/assets/magnus-lunay-B1CWLBWEHHI-unsplash.jpg"
+          }
+          title="Contemplative Reptile"
+        />
+      </CardActionArea>
+      <CardActionArea onClick={handleClick}>
+        <Typography variant="h6" align="center">
+          {venue} - {city} - <Moment format="MM/DD/YYYY">{date}</Moment>
         </Typography>
-        <List>
-          {green_room ? (
+        <br></br>
+      </CardActionArea>
+      <Collapse in={checked}>
+        <CardContent>
+          <Divider />
+          <List>
             <ListItem disablePadding>
               <ListItemIcon>
-                <WeekendIcon />
+                <AirportShuttleIcon />
               </ListItemIcon>
-              <ListItemText primary="Green Room"></ListItemText>
+              <ListItemText>
+                Load In: <Moment format="hh:mm A ">{loadin}</Moment>
+              </ListItemText>
             </ListItem>
-          ) : (
-            <ListItem disablePadding>
-              <ListItemIcon>
-                <SentimentVeryDissatisfiedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Green Room">No Green Room!</ListItemText>
-            </ListItem>
-          )}
-          {wifi && (
-            <ListItem disablePadding>
-              <ListItemIcon>
-                <WifiIcon />
-              </ListItemIcon>
-              <ListItemText>{wifi}</ListItemText>
-            </ListItem>
-          )}
-          <Stack row>
-            {guarantee && (
+            {green_room ? (
               <ListItem disablePadding>
                 <ListItemIcon>
-                  <AttachMoneyIcon />
+                  <WeekendIcon />
                 </ListItemIcon>
-                <ListItemText>
-                  Guarantee: ${parseFloat(guarantee).toFixed(2)}
+                <ListItemText primary="Green Room"></ListItemText>
+              </ListItem>
+            ) : (
+              <ListItem disablePadding>
+                <ListItemIcon>
+                  <SentimentVeryDissatisfiedIcon />
+                </ListItemIcon>
+                <ListItemText primary="No Green Room">
+                  No Green Room!
                 </ListItemText>
               </ListItem>
             )}
-            {merch && (
+            {wifi && (
               <ListItem disablePadding>
                 <ListItemIcon>
-                  <PointOfSaleIcon />
+                  <WifiIcon />
                 </ListItemIcon>
-                <ListItemText>
-                  {" "}
-                  Merch: ${parseFloat(merch).toFixed(2)}
-                </ListItemText>
+                <ListItemText>{wifi}</ListItemText>
               </ListItem>
             )}
-          </Stack>
-        </List>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleClickOpen}>
-          Edit
-        </Button>
-        <Button size="small" onClick={handleDeleteDialog}>
-          Delete
-        </Button>
-      </CardActions>
+            <Stack row>
+              {guarantee && (
+                <ListItem disablePadding>
+                  <ListItemIcon>
+                    <AttachMoneyIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Guarantee: ${parseFloat(guarantee).toFixed(2)}
+                  </ListItemText>
+                </ListItem>
+              )}
+              {merch && (
+                <ListItem disablePadding>
+                  <ListItemIcon>
+                    <PointOfSaleIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {" "}
+                    Merch: ${parseFloat(merch).toFixed(2)}
+                  </ListItemText>
+                </ListItem>
+              )}
+            </Stack>
+          </List>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleClickOpen}>
+            Edit
+          </Button>
+          <Button size="small" onClick={handleDeleteDialog}>
+            Delete
+          </Button>
+        </CardActions>
+      </Collapse>
       <ShowFormModal show={props.show} open={open} handleClose={handleClose} />
       <ConfirmationDialog
         open={openDeleteDialog}
