@@ -26,7 +26,7 @@ const PromoterDetails = (props) => {
     </Typography>
   ));
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 500 }}>
       <CardContent>
         <CardHeader variant="h5" title={name} subheader={email} />
         <Divider />
