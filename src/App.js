@@ -17,6 +17,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
 import ErrorBoundary from "./layout/ErrorBoundary";
 import ShowsList from "./components/shows/ShowsList";
+import ShowLandingPage from "./components/shows/ShowLandingPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,16 +42,19 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route
-                    Route
                     path="shows"
                     element={userToken ? <Shows /> : <Auth />}
                   >
                     <Route
-                      path="list"
+                      path="/shows/"
+                      element={userToken ? <ShowLandingPage /> : <Auth />}
+                    />
+                    <Route
+                      path="/shows/list"
                       element={userToken ? <ShowsList /> : <Auth />}
                     />
                     <Route
-                      path="new"
+                      path="/shows/new"
                       element={userToken ? <NewShowForm /> : <Auth />}
                     />
                   </Route>
