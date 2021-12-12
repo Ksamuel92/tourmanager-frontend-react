@@ -12,6 +12,7 @@ import {
   Switch,
   FormGroup,
   Container,
+  Divider,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
@@ -141,7 +142,7 @@ const NewShowForm = () => {
             : "Something went wrong. Try again."}
         </Alert>
       )}
-      <Typography variant="h5" align="center" sx>
+      <Typography variant="h5" align="center" sx={{ marginTop: "15px" }}>
         Create New Show
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -153,8 +154,8 @@ const NewShowForm = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Grid item row xs={12}>
-              <div>
+            <Grid item xs={12}>
+              <FormGroup row>
                 <TextField
                   id="venue"
                   name="venue"
@@ -163,10 +164,6 @@ const NewShowForm = () => {
                   onChange={handleChange}
                   required
                 />{" "}
-              </div>
-            </Grid>
-            <Grid item row xs={12}>
-              <div>
                 <TextField
                   id="city"
                   name="city"
@@ -175,8 +172,9 @@ const NewShowForm = () => {
                   onChange={handleChange}
                   required
                 />{" "}
-              </div>
+              </FormGroup>
             </Grid>
+
             <Grid item xs={12}>
               <FormGroup row>
                 <DatePicker
