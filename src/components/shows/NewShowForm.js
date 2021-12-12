@@ -165,6 +165,18 @@ const NewShowForm = () => {
                 />{" "}
               </div>
             </Grid>
+            <Grid item row xs={12}>
+              <div>
+                <TextField
+                  id="city"
+                  name="city"
+                  label="City"
+                  value={showFormState.city || ""}
+                  onChange={handleChange}
+                  required
+                />{" "}
+              </div>
+            </Grid>
             <Grid item xs={12}>
               <FormGroup row>
                 <DatePicker
