@@ -32,17 +32,17 @@ npm install
 
 ### How To Use TourManager
 
-Once TourManager's [backend](https://github.com/Ksamuel92/tourmanager-backend-react) rails server is running, run npm start from the frontend's repository. The app will open www.localhost:3000 and you'll be taken to a landing page that looks like this. 
+Once TourManager's [backend](https://github.com/Ksamuel92/tourmanager-backend-react) rails server is running, run npm start from the frontend's repository. The app will open www.localhost:3000 and you'll be taken to a landing page that looks like this.
 ![LandingPage](public/assets/LandingPage.png)
 Click "Login" and create a new account with your full name, email, and password.
 ![Login](public/assets/LogIn.png)
 You can then click "Create New Show" and input details about a show, including the venue, guarantee, promoter and more!
 ![CreateNewShow](public/assets/CreateNewShow.png)
-Make as many shows as you need. The gross total of your merch and guarantees will be generated for ease. 
+Make as many shows as you need. The gross total of your merch and guarantees will be generated for ease.
 ![ShowList](public/assets/ShowList.png)
 You can even check what promoter's are running each show so you can find their contact information easily.
 ![PromoterList](public/assets/PromoterList.png)
-When you log out, you can always get your shows back by using the same email that you logged in with the first time. 
+When you log out, you can always get your shows back by using the same email that you logged in with the first time.
 
 ## Contributing to TourManager
 
@@ -54,6 +54,10 @@ To contribute to TourManager, follow these steps:
 - Push to the original branch: git push origin tourmanager-frontend-react
 - Create the pull request.
 - Alternatively see the GitHub documentation on creating a pull request.
+
+## Roadmap
+
+There are many features I wish to add to TourManager, including a more social element with users, a way to generate how many miles are being covered through Google Maps, a way to generate daysheets that can be automatically emailed to the touring group, and the overall style of the app.
 
 ## Contact
 
