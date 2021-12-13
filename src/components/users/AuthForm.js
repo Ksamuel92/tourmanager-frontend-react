@@ -63,10 +63,14 @@ const AuthForm = () => {
   return (
     <Fragment>
       {signUpError && (
-        <Alert severity="error">{signUpErrorMessage.data.status.message}</Alert>
+        <Alert severity="error" onClose={() => {}}>
+          {signUpErrorMessage.data.status.message}
+        </Alert>
       )}
       {loginError && (
-        <Alert severity="error">{loginErrorMessage.data.error}</Alert>
+        <Alert severity="error" onClose={() => {}}>
+          {loginErrorMessage.data.error}
+        </Alert>
       )}
 
       <form onSubmit={handleSubmit} sx={{ outline: "white" }}>
