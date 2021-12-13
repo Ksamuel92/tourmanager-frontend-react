@@ -1,5 +1,6 @@
 import { TextField, Button } from "@material-ui/core";
-import { Fragment } from "react";
+import { Snackbar } from "@mui/material";
+import { Fragment, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import useInput from "../../hooks/useInput";
 import {
@@ -30,6 +31,8 @@ const AuthForm = () => {
   ] = useLoginMutation();
   const navigate = useNavigate();
   const [signUp, setsignUp] = useState(false);
+  const [openSignUpError, setOpenSignUpError] = useState(false);
+  const [openLoginError, setOpenLoginError] = useState(true);
   const { value: name, bind: bindName, reset: resetName } = useInput("");
   const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
   const {
@@ -37,6 +40,14 @@ const AuthForm = () => {
     bind: bindPassword,
     reset: resetPassword,
   } = useInput("");
+
+  useEffect(() => {
+    if (signUpError && signUp) {
+      setOpenSignUpError(true);
+    } else if (loginError && !signUp) {
+      setOpenLoginError(true);
+    }
+  }, [signUpError, loginError]);
 
   const handleSwitch = () => {
     setsignUp((prevState) => !prevState);
@@ -63,14 +74,40 @@ const AuthForm = () => {
   return (
     <Fragment>
       {signUpError && (
-        <Alert severity="error" onClose={() => {}}>
-          {signUpErrorMessage.data.status.message}
-        </Alert>
+        <Snackbar
+          autoHideDuration={2000}
+          onClose={() => {
+            setOpenSignUpError(false);
+          }}
+          open={openSignUpError}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOpenSignUpError(false);
+            }}
+          >
+            {signUpErrorMessage.data.status.message}
+          </Alert>
+        </Snackbar>
       )}
       {loginError && (
-        <Alert severity="error" onClose={() => {}}>
-          {loginErrorMessage.data.error}
-        </Alert>
+        <Snackbar
+          autoHideDuration={2000}
+          onClose={() => {
+            setOpenLoginError(false);
+          }}
+          open={openLoginError}
+        >
+          <Alert
+            severity="error"
+            onClose={() => {
+              setOpenLoginError(false);
+            }}
+          >
+            {loginErrorMessage.data.error}
+          </Alert>
+        </Snackbar>
       )}
 
       <form onSubmit={handleSubmit} sx={{ outline: "white" }}>
@@ -85,8 +122,8 @@ const AuthForm = () => {
         >
           <Grid item>
             <Typography variant="h6" align="center">
-              {signUp && "Sign Up"}
-              {!signUp && "Log In"}
+              {signUp && <Typography variant="h3">Sign Up</Typography>}
+              {!signUp && <Typography variant="h3">Log In</Typography>}
             </Typography>
           </Grid>
           <Grid item>
