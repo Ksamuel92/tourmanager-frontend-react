@@ -16,13 +16,15 @@ import {
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
-import { useState } from "react";
+import CurrencyInput from "react-currency-input-field";
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";
 import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { Fragment } from "react";
+import { filterArrayDuplicatesById as filterPromoters } from "../../helper/filterArrayDuplicates";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 // import ExistingPromoterFields from "../promoters/ExistingPromoterFields";
@@ -30,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 const NewShowForm = () => {
   const navigate = useNavigate();
   const [showFormState, setShowFormState] = useState({});
+  const [filteredPromoterData, setFilteredPromoterData] = useState([]);
   const [promoterFormState, setPromoterFormState] = useState({});
   const [timeAndDate, setTimeAndDate] = useState({
     date: new Date(),
@@ -45,6 +48,15 @@ const NewShowForm = () => {
     isSuccess,
     isError,
   } = useGetPromotersQuery();
+
+  useEffect(() => {
+    if (isSuccess) {
+      const filteredPromoters = filterPromoters(promoterData);
+      debugger;
+      setFilteredPromoterData(filteredPromoters);
+    }
+  }, [isSuccess, promoterData]);
+
   const [
     submitShow,
     { isSuccess: showSubmitted, isError: addShowHasError, error: addShowError },
@@ -202,6 +214,7 @@ const NewShowForm = () => {
                   <OutlinedInput
                     id="guarantee"
                     name="guarantee"
+                    type="number"
                     value={showFormState.guarantee || ""}
                     onChange={handleChange}
                     startAdornment={
@@ -216,6 +229,7 @@ const NewShowForm = () => {
                     id="merch"
                     value={showFormState.merch || ""}
                     name="merch"
+                    type="number"
                     onChange={handleChange}
                     startAdornment={
                       <InputAdornment position="start">$</InputAdornment>
@@ -280,8 +294,8 @@ const NewShowForm = () => {
                 >
                   {isError && error.message}
                   {isSuccess &&
-                    promoterData &&
-                    promoterData.map((promoter) => (
+                    filteredPromoterData &&
+                    filteredPromoterData.map((promoter) => (
                       <MenuItem key={promoter.id} value={promoter.id}>
                         {" "}
                         {promoter.name} -{promoter.email}{" "}
