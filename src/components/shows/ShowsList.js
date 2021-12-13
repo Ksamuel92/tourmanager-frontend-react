@@ -1,34 +1,56 @@
 import { useGetShowsQuery } from "../../features/shows/show-slice";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ShowDetails from "../shows/ShowDetails";
 import { useSelector } from "react-redux";
-import { Link } from "@material-ui/core";
+import { Link as MUILinkWrapper, Box } from "@material-ui/core";
 import { Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 const ShowsList = (props) => {
-  const { id } = useSelector((store) => store.authReducer.user);
+  const { id, name } = useSelector((store) => store.authReducer.user);
 
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
     refetchOnMountOrArgChange: true,
   });
+
   return (
     <Fragment>
       <Typography variant="h3" color="white" align="center">
         Show List
       </Typography>
       <Grid container row="true" spacing={1} mt="15px">
-        {isLoading && "Loading..."}
+        {isLoading && <Typography align="center">Loading</Typography>}
         {isError && error.message}
         {isSuccess &&
           data &&
-          data.map((show, index) => (
-            <Grid item key={index} md={3}>
-              <ShowDetails key={show.id} show={show} />
+          data.map((show) => (
+            <Grid item key={show.id} md={2}>
+              <ShowDetails show={show} />
             </Grid>
           ))}
       </Grid>
+      <Fragment>
+        <Box sx={{ marginTop: "20px" }}>
+          <Typography variant="h4" align="center">
+            {" "}
+            Welcome {name}!
+          </Typography>
+        </Box>
+        <Box align="center">
+          <MUILinkWrapper
+            variant="h6"
+            align="center"
+            component={ReactRouterLink}
+            underline="none"
+            color="white"
+            to="/shows/new"
+          >
+            Create New Show
+          </MUILinkWrapper>
+        </Box>
+      </Fragment>
     </Fragment>
   );
 };
