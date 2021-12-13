@@ -13,6 +13,14 @@ const PromoterList = () => {
       refetchOnMountOrArgChange: true,
     }
   );
+
+  const filteredPromoters = data.filter(
+    (promoter, index, self) =>
+      self.findIndex((p) => p.id === promoter.id) === index
+  );
+
+  debugger;
+
   return (
     <Fragment>
       <Typography variant="h3" color="white" align="center">
@@ -23,9 +31,9 @@ const PromoterList = () => {
         {isError && error.message}
         {isSuccess &&
           data &&
-          data.map((promoter, index) => (
-            <Grid item key={index} md={3}>
-              <PromoterDetails key={promoter.id} promoter={promoter} />
+          filteredPromoters.map((promoter) => (
+            <Grid item key={promoter.id} md={3}>
+              <PromoterDetails promoter={promoter} />
             </Grid>
           ))}
       </Grid>
