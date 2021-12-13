@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import LandingHeader from "../layout/LandingHeader";
-import LandingGrid from "../layout/LandingGrid";
+import LandingHeader from "../Layout/LandingHeader";
+import LandingGrid from "../Layout/LandingGrid";
 
 const LandingPage = () => {
   return (
