@@ -17,7 +17,6 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
 import ErrorBoundary from "./Layout/ErrorBoundary";
 import ShowsList from "./components/shows/ShowsList";
-import ShowLandingPage from "./components/shows/ShowLandingPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
