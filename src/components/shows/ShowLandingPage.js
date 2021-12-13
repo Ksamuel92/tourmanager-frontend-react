@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 import { default as MUILink } from "@mui/material/Link";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const ShowLandingPage = () => {
