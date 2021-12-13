@@ -37,7 +37,7 @@ Once TourManager's [backend](https://github.com/Ksamuel92/tourmanager-backend-re
 Click "Login" and create a new account with your full name, email, and password.
 [LandingPage](public/assets/Login.png)
 You can then click "Create New Show" and input details about a show, including the venue, guarantee, promoter and more!
-[LandingPage](public/assets/CreateNewShow.png)
+[LandingPage](/Users/kyle/tourmanager-frontend-react/public/assets/CreateNewShow.png)
 Make as many shows as you need. The gross total of your merch and guarantees will be generated for ease. 
 [LandingPage](public/assets/ShowList.png)
 You can even check what promoter's are running each show so you can find their contact information easily.
