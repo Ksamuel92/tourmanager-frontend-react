@@ -33,15 +33,15 @@ npm install
 ### How To Use TourManager
 
 Once TourManager's [backend](https://github.com/Ksamuel92/tourmanager-backend-react) rails server is running, run npm start from the frontend's repository. The app will open www.localhost:3000 and you'll be taken to a landing page that looks like this. 
-[LandingPage](public/assets/LandingPage.png)
+![LandingPage](public/assets/LandingPage.png)
 Click "Login" and create a new account with your full name, email, and password.
-[LandingPage](public/assets/Login.png)
+![Login](public/assets/Login.png)
 You can then click "Create New Show" and input details about a show, including the venue, guarantee, promoter and more!
-[LandingPage](/Users/kyle/tourmanager-frontend-react/public/assets/CreateNewShow.png)
+![CreateNewShow](/Users/kyle/tourmanager-frontend-react/public/assets/CreateNewShow.png)
 Make as many shows as you need. The gross total of your merch and guarantees will be generated for ease. 
-[LandingPage](public/assets/ShowList.png)
+![ShowList](public/assets/ShowList.png)
 You can even check what promoter's are running each show so you can find their contact information easily.
-[LandingPage](public/assets/PromoterList.png)
+![PromoterList](public/assets/PromoterList.png)
 When you log out, you can always get your shows back by using the same email that you logged in with the first time. 
 
 ## Contributing to TourManager
