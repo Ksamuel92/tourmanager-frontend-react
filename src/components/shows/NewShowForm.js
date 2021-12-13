@@ -15,6 +15,7 @@ import {
   Divider,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
+import moment from "moment";
 import TimePicker from "@mui/lab/TimePicker";
 import CurrencyInput from "react-currency-input-field";
 import { useState, useEffect } from "react";
@@ -104,6 +105,7 @@ const NewShowForm = () => {
     if (e === null) {
       return;
     }
+    debugger;
     setTimeAndDate({
       ...timeAndDate,
       date: e.toISOString(),
@@ -154,7 +156,7 @@ const NewShowForm = () => {
             : "Something went wrong. Try again."}
         </Alert>
       )}
-      <Typography variant="h5" align="center" sx={{ marginTop: "15px" }}>
+      <Typography variant="h5" align="center" sx={{ marginTop: "30px" }}>
         Create New Show
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -192,14 +194,17 @@ const NewShowForm = () => {
                 <DatePicker
                   name="date"
                   className="date"
+                  type="date"
                   label="Date"
-                  value={showFormState.date}
+                  inputFormat="MM/DD/YYYY"
+                  value={moment(showFormState.date)}
                   onChange={handleMomentDate}
                   renderInput={(params) => <TextField {...params} />}
                 />
                 <TimePicker
                   name="loadin"
                   className="loadin"
+                  type="time"
                   label="Load In"
                   value={showFormState.loadin}
                   onChange={handleMomentTime}
