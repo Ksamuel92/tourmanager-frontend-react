@@ -1,17 +1,23 @@
 import { Box } from "@material-ui/core";
 import { Typography } from "@mui/material";
-import { Fragment } from "react";
-const LandingHeader = () => {
+import { Fragment, useEffect, useState } from "react";
+import Fade from "@mui/material/Fade";
+
+const LandingHeader = (props) => {
   return (
     <Fragment>
-      <Box>
-        <Typography variant="h1">TourManager</Typography>
-      </Box>
-      <Box mt={2}>
-        <Typography variant="subtitle1" gutterBottom component="div">
-          Lorem ipsum dolor sit amet, consecteturasdfsdfasdfsadfsadfasdf
+      <Fade in={props.fade}>
+        <Typography
+          mt={2}
+          color="white"
+          align="center"
+          variant="h2"
+          component="h1"
+          gutterBottom
+        >
+          TourManager
         </Typography>
-      </Box>
+      </Fade>
     </Fragment>
   );
 };
