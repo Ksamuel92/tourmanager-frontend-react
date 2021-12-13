@@ -31,7 +31,6 @@ const ShowDetails = (props) => {
   const [checked, setChecked] = useState(false);
 
   const [deleteShow, { isSuccess, isError }] = useDeleteShowMutation();
-  // debugger;
 
   const handleDelete = async (e) => {
     const response = deleteShow(id);
@@ -83,7 +82,7 @@ const ShowDetails = (props) => {
                 <AirportShuttleIcon />
               </ListItemIcon>
               <ListItemText>
-                Load In: <Moment format="hh:mm A ">{loadin}</Moment>
+                Load In: <Moment format="hh:mm A">{loadin}</Moment>
               </ListItemText>
             </ListItem>
             {green_room ? (
@@ -117,9 +116,7 @@ const ShowDetails = (props) => {
                   <ListItemIcon>
                     <AttachMoneyIcon />
                   </ListItemIcon>
-                  <ListItemText>
-                    Guarantee: ${parseFloat(guarantee).toFixed(2)}
-                  </ListItemText>
+                  <ListItemText>Guarantee: ${guarantee}</ListItemText>
                 </ListItem>
               )}
               {merch && (
@@ -127,10 +124,7 @@ const ShowDetails = (props) => {
                   <ListItemIcon>
                     <PointOfSaleIcon />
                   </ListItemIcon>
-                  <ListItemText>
-                    {" "}
-                    Merch: ${parseFloat(merch).toFixed(2)}
-                  </ListItemText>
+                  <ListItemText> Merch: ${merch}</ListItemText>
                 </ListItem>
               )}
             </Stack>
