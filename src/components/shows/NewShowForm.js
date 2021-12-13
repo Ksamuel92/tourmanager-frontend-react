@@ -129,13 +129,13 @@ const NewShowForm = () => {
       };
     }
     submitShow(payload);
-    navigate("/shows/list", { state: showSubmitted });
+    navigate("/shows", { state: showSubmitted });
   };
 
   return (
     <Fragment>
       {addShowHasError && (
-        <Alert severity="error">
+        <Alert severity="error" onClose={() => {}}>
           {" "}
           {"promoter" in addShowError.data.error
             ? "You must provide a promoter or create one"
