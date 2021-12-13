@@ -39,8 +39,8 @@ const EditShowForm = (props) => {
     id,
     venue,
     city,
-    guarantee: parseFloat(guarantee).toFixed(2),
-    merch: parseFloat(merch).toFixed(2),
+    merch,
+    guarantee,
     green_room,
     wifi_network,
     wifi_password,
@@ -125,7 +125,7 @@ const EditShowForm = (props) => {
   console.log(editPromoterState);
   return (
     <Fragment>
-      {editShowHasError && <Alert severity="error"></Alert>}
+      {editShowHasError && <Alert severity="error" onClose={() => {}}></Alert>}
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item>
