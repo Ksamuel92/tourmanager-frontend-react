@@ -16,21 +16,7 @@ const ShowsList = (props) => {
   });
 
   return (
-    <Fragment>
-      <Typography variant="h3" color="white" align="center">
-        Show List
-      </Typography>
-      <Grid container row="true" spacing={1} mt="15px">
-        {isLoading && <Typography align="center">Loading</Typography>}
-        {isError && error.message}
-        {isSuccess &&
-          data &&
-          data.map((show) => (
-            <Grid item key={show.id} md={2}>
-              <ShowDetails show={show} />
-            </Grid>
-          ))}
-      </Grid>
+    <div>
       <Fragment>
         <Box sx={{ marginTop: "20px" }}>
           <Typography variant="h4" align="center">
@@ -51,7 +37,23 @@ const ShowsList = (props) => {
           </MUILinkWrapper>
         </Box>
       </Fragment>
-    </Fragment>
+      <Fragment>
+        <Typography variant="h3" color="white" align="center">
+          Show List
+        </Typography>
+        <Grid container row="true" spacing={1} mt="15px">
+          {isLoading && <Typography align="center">Loading</Typography>}
+          {isError && error.message}
+          {isSuccess &&
+            data &&
+            data.map((show) => (
+              <Grid item key={show.id} md={2}>
+                <ShowDetails show={show} />
+              </Grid>
+            ))}
+        </Grid>
+      </Fragment>
+    </div>
   );
 };
 
