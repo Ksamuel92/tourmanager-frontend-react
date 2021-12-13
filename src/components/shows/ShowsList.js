@@ -14,7 +14,7 @@ const ShowsList = (props) => {
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
     refetchOnMountOrArgChange: true,
   });
-
+  debugger;
   return (
     <div>
       <Fragment>
@@ -38,9 +38,11 @@ const ShowsList = (props) => {
         </Box>
       </Fragment>
       <Fragment>
-        <Typography variant="h3" color="white" align="center">
-          Show List
-        </Typography>
+        {data && data.length > 0 && (
+          <Typography variant="h3" color="white" align="center">
+            Show List
+          </Typography>
+        )}
         <Grid container row="true" spacing={1} mt="15px">
           {isLoading && <Typography align="center">Loading</Typography>}
           {isError && error.message}
