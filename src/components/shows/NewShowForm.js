@@ -12,12 +12,11 @@ import {
   Switch,
   FormGroup,
   Container,
-  Divider,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
 import moment from "moment";
 import TimePicker from "@mui/lab/TimePicker";
-import CurrencyInput from "react-currency-input-field";
+
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";

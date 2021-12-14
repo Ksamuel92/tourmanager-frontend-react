@@ -1,5 +1,4 @@
 import { useGetShowsQuery } from "../../features/shows/show-slice";
-import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ShowDetails from "../shows/ShowDetails";

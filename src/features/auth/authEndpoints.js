@@ -1,6 +1,5 @@
 import { tourManagerApi } from "../../services/api";
 import { setCredentials, logoutUser } from "../../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
 
 export const authApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,9 +18,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
 
           dispatch(setCredentials({ user, token }));
         } catch (err) {
-          //onError side-effect
-          // TODO: Handle error message here
-          console.log(err);
+          console.log(err); //Error handled with Hooks
         }
       },
       inValidateTags: ["Show", "Promoter"],
@@ -40,7 +37,6 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           const user = data.data;
           dispatch(setCredentials({ user, token }));
         } catch (err) {
-          //TODO: Handle Error message
           console.log(err);
         }
       },
@@ -53,13 +49,12 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
       }),
       async onQueryStarted(body, { dispatch, queryFulfilled }) {
         try {
-          const { data, meta } = await queryFulfilled;
+          const { meta } = await queryFulfilled;
 
           if (meta.response.ok) {
             dispatch(logoutUser());
           }
         } catch (err) {
-          //TODO: Handle Error Message
           console.log(err);
         }
       },

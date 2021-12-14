@@ -1,5 +1,5 @@
 import { Typography, Button } from "@material-ui/core";
-import CardMedia from "@mui/material/CardMedia";
+
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";

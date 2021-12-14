@@ -1,6 +1,5 @@
-import { Box } from "@material-ui/core";
 import { Typography } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import Fade from "@mui/material/Fade";
 
 const LandingHeader = (props) => {

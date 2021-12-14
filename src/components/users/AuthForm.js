@@ -33,13 +33,9 @@ const AuthForm = () => {
   const [signUp, setsignUp] = useState(false);
   const [openSignUpError, setOpenSignUpError] = useState(false);
   const [openLoginError, setOpenLoginError] = useState(true);
-  const { value: name, bind: bindName, reset: resetName } = useInput("");
-  const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
-  const {
-    value: password,
-    bind: bindPassword,
-    reset: resetPassword,
-  } = useInput("");
+  const { value: name, bind: bindName } = useInput("");
+  const { value: email, bind: bindEmail } = useInput("");
+  const { value: password, bind: bindPassword } = useInput("");
 
   useEffect(() => {
     if (signUpError && signUp) {
@@ -47,7 +43,7 @@ const AuthForm = () => {
     } else if (loginError && !signUp) {
       setOpenLoginError(true);
     }
-  }, [signUpError, loginError]);
+  }, [signUpError, loginError, signUp]);
 
   const handleSwitch = () => {
     setsignUp((prevState) => !prevState);

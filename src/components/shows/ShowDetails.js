@@ -119,7 +119,14 @@ const ShowDetails = (props) => {
                   <ListItemText>Guarantee: ${guarantee}</ListItemText>
                 </ListItem>
               )}
-              {merch && (
+              {merch ? (
+                <ListItem disablePadding>
+                  <ListItemIcon>
+                    <PointOfSaleIcon />
+                  </ListItemIcon>
+                  <ListItemText> Merch: ${merch}</ListItemText>
+                </ListItem>
+              ) : (
                 <ListItem disablePadding>
                   <ListItemIcon>
                     <PointOfSaleIcon />

@@ -12,7 +12,7 @@ const EditPromoterForm = (props) => {
     id,
   });
 
-  const [editPromoter, object] = useEditPromoterMutation();
+  const [editPromoter] = useEditPromoterMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;

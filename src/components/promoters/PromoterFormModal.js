@@ -3,8 +3,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions,
-  Button,
 } from "@mui/material";
 import EditPromoterForm from "./EditPromoterForm";
 
