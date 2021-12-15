@@ -15,14 +15,13 @@ const PromoterList = () => {
       refetchOnMountOrArgChange: true,
     }
   );
+
   useEffect(() => {
     if (isSuccess) {
       const filteredPromoters = filterPromoters(data);
       setFilteredPromotersData(filteredPromoters);
     }
   }, [data, isSuccess]);
-
-  debugger;
 
   return (
     <Fragment>
