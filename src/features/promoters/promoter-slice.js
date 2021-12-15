@@ -35,7 +35,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
 
 export const {
   useGetPromotersQuery,
-  usegetPromoterByIdQuery,
+  useGetPromoterByIdQuery,
   useAddPromoterMutation,
   useEditPromoterMutation,
   useDeletePromoterMutation,
