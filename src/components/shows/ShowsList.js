@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import ShowDetails from "../shows/ShowDetails";
 import { useSelector } from "react-redux";
 import { Link as MUILinkWrapper, Box } from "@material-ui/core";
+import Divider from "@mui/material/Divider";
 import { Fragment } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
@@ -36,6 +37,7 @@ const ShowsList = (props) => {
           </MUILinkWrapper>
         </Box>
       </Fragment>
+      <Divider />
       <Fragment>
         {data && data.length > 0 && (
           <Typography variant="h3" color="white" align="center">
