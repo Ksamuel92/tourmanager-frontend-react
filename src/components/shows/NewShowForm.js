@@ -14,16 +14,14 @@ import {
   Container,
 } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
-import moment from "moment";
 import TimePicker from "@mui/lab/TimePicker";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Grid from "@mui/material/Grid";
 import { useAddShowMutation } from "../../features/shows/show-slice";
 import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
-import { Fragment } from "react";
 import { filterArrayDuplicatesById as filterPromoters } from "../../helper/filterArrayDuplicates";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
@@ -106,7 +104,7 @@ const NewShowForm = () => {
     }
     setTimeAndDate({
       ...timeAndDate,
-      date: e.format("MM/DD/YYYY"),
+      date: e.toISOString(),
     });
   };
 
