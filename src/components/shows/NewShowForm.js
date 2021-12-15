@@ -104,10 +104,9 @@ const NewShowForm = () => {
     if (e === null) {
       return;
     }
-    debugger;
     setTimeAndDate({
       ...timeAndDate,
-      date: e.toISOString(),
+      date: e.format("MM/DD/YYYY"),
     });
   };
 
@@ -195,8 +194,9 @@ const NewShowForm = () => {
                   className="date"
                   type="date"
                   label="Date"
+                  disableOpenPicker="true"
                   inputFormat="MM/DD/YYYY"
-                  value={moment(showFormState.date)}
+                  value={showFormState.date}
                   onChange={handleMomentDate}
                   renderInput={(params) => <TextField {...params} />}
                 />
@@ -205,6 +205,7 @@ const NewShowForm = () => {
                   className="loadin"
                   type="time"
                   label="Load In"
+                  disableOpenPicker="true"
                   value={showFormState.loadin}
                   onChange={handleMomentTime}
                   renderInput={(params) => <TextField {...params} />}
