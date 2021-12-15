@@ -19,7 +19,7 @@ const ShowsList = (props) => {
     <div>
       <Fragment>
         <Box sx={{ marginTop: "20px" }}>
-          <Typography variant="h4" align="center">
+          <Typography variant="h4" color="common.white" align="center">
             {" "}
             Welcome {name}!
           </Typography>
@@ -30,7 +30,7 @@ const ShowsList = (props) => {
             align="center"
             component={ReactRouterLink}
             underline="none"
-            color="white"
+            color="secondary"
             to="/shows/new"
           >
             Create New Show
