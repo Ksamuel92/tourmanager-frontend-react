@@ -7,6 +7,7 @@ import NewShowForm from "./components/shows/NewShowForm";
 import Promoters from "./pages/Promoters";
 import PromoterList from "./components/promoters/PromoterList";
 import Auth from "./pages/Auth";
+import UserProfile from "./components/users/UserProfile";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout/Layout";
 import LandingPage from "./pages/LandingPage";
@@ -63,7 +64,10 @@ function App() {
                     />
                   </Route>
                   <Route path="/auth" element={<Auth />} />
-                  <Route path="/user" />
+                  <Route
+                    path="/user"
+                    element={userToken ? <UserProfile /> : <Auth />}
+                  />
                 </Routes>
               </ErrorBoundary>
             </main>
