@@ -1,5 +1,5 @@
-import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { TextField, Button, Alert } from "@mui/material";
+import { useState, Fragment } from "react";
 import { useEditPromoterMutation } from "../../features/promoters/promoter-slice";
 import Grid from "@mui/material/Grid";
 
@@ -12,7 +12,10 @@ const EditPromoterForm = (props) => {
     id,
   });
 
-  const [editPromoter] = useEditPromoterMutation();
+  const [
+    editPromoter,
+    { isError: editPromoterHasError, error: editPromoterError },
+  ] = useEditPromoterMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,27 +40,35 @@ const EditPromoterForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid spacing={4}>
-        <TextField
-          id="name"
-          name="name"
-          label="Name"
-          onChange={handleChange}
-          value={editPromoterFormState.name}
-          required
-        />
-        <TextField
-          id="email"
-          name="email"
-          label="Email"
-          value={editPromoterFormState.email || ""}
-          onChange={handleChange}
-          required
-        />
-        <Button type="submit">Edit</Button>
-      </Grid>
-    </form>
+    <Fragment>
+      {editPromoterHasError && (
+        <Alert severity="error" onClose={() => {}}>
+          {" "}
+          {editPromoterError}{" "}
+        </Alert>
+      )}
+      <form onSubmit={handleSubmit}>
+        <Grid spacing={4}>
+          <TextField
+            id="name"
+            name="name"
+            label="Name"
+            onChange={handleChange}
+            value={editPromoterFormState.name}
+            required
+          />
+          <TextField
+            id="email"
+            name="email"
+            label="Email"
+            value={editPromoterFormState.email || ""}
+            onChange={handleChange}
+            required
+          />
+          <Button type="submit">Edit</Button>
+        </Grid>
+      </form>
+    </Fragment>
   );
 };
 
