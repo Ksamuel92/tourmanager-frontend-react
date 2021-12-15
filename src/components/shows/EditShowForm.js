@@ -58,7 +58,7 @@ const EditShowForm = (props) => {
   const user = useSelector((store) => store.authReducer.user);
 
   const [editShow, { isError: editShowHasError, error: editShowError }] =
-    useEditShowMutation(); //TODO: Extract object with loading
+    useEditShowMutation();
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
