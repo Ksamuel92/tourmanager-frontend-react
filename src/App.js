@@ -5,7 +5,7 @@ import "./App.css";
 import Shows from "./pages/Shows";
 import NewShowForm from "./components/shows/NewShowForm";
 import Promoters from "./pages/Promoters";
-import NewPromoterForm from "./components/promoters/NewPromoterForm";
+import PromoterList from "./components/promoters/PromoterList";
 import Auth from "./pages/Auth";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout/Layout";
@@ -58,8 +58,8 @@ function App() {
                     element={userToken ? <Promoters /> : <Auth />}
                   >
                     <Route
-                      path="new"
-                      element={userToken ? <NewPromoterForm /> : <Auth />}
+                      path="/promoters/"
+                      element={userToken ? <PromoterList /> : <Auth />}
                     />
                   </Route>
                   <Route path="/auth" element={<Auth />} />
