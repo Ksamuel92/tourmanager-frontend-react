@@ -102,6 +102,7 @@ const NavBar = () => {
                 label="Home"
                 component={NavLink}
                 to="/"
+                key={0}
               />
               {loggedIn && (
                 <Tab
@@ -109,6 +110,7 @@ const NavBar = () => {
                   label="Shows"
                   component={NavLink}
                   to="/shows"
+                  key={1}
                 />
               )}
               {loggedIn && (
@@ -118,6 +120,15 @@ const NavBar = () => {
                   component={NavLink}
                   to="/promoters"
                   key={2}
+                />
+              )}
+              {loggedIn && (
+                <Tab
+                  className={classes.tab}
+                  label="User Profile"
+                  component={NavLink}
+                  to="/user"
+                  key={3}
                 />
               )}
             </Tabs>
