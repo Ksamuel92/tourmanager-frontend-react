@@ -1,19 +1,19 @@
 import { createTheme } from "@material-ui/core/styles";
 
 const millenialPink = "#F3CFC6";
-const quartz = "#51414F";
+const lightBlue = "#C6EAF3";
 
 const theme = createTheme({
   palette: {
     common: {
       millenialPink,
-      quartz,
+      lightBlue,
     },
     primary: {
       main: millenialPink,
     },
     secondary: {
-      main: quartz,
+      main: lightBlue,
     },
   },
 });
