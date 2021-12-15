@@ -1,9 +1,9 @@
-import PromoterList from "../components/promoters/PromoterList";
+import { Outlet } from "react-router-dom";
 
 const Promoters = () => {
   return (
     <div>
-      <PromoterList />
+      <Outlet />
     </div>
   );
 };
