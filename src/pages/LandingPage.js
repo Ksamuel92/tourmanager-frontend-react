@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
-import LandingHeader from "../Layout/LandingHeader";
-import LandingGrid from "../Layout/LandingGrid";
+import LandingHeader from "../layout/LandingHeader";
+import LandingGrid from "../layout/LandingGrid"
 
 const LandingPage = () => {
   const [fade, setFade] = useState(false);

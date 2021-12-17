@@ -9,14 +9,14 @@ import PromoterList from "./components/promoters/PromoterList";
 import Auth from "./pages/Auth";
 import UserProfile from "./components/users/UserProfile";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./Layout/Layout";
+import Layout from "./layout/Layout";
 import LandingPage from "./pages/LandingPage";
 import { makeStyles } from "@material-ui/core/styles";
 import { CssBaseline } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
-import ErrorBoundary from "./Layout/ErrorBoundary";
+import ErrorBoundary from "./layout/ErrorBoundary"
 import ShowsList from "./components/shows/ShowsList";
 
 const useStyles = makeStyles((theme) => ({

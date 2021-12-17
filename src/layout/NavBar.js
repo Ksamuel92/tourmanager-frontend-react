@@ -233,7 +233,7 @@ const NavBar = () => {
       </Menu>
     </Fragment>
   );
-
+              //TODO: ADD DRAWER FUNCTIONALITY FOR MOBILE
   return (
     <div sx={{ flexGrow: 1 }}>
       <ElevationScroll>
@@ -242,7 +242,7 @@ const NavBar = () => {
             <Typography variant="h6" className={classes.title}>
               TourManager
             </Typography>
-            {matches ? tabs : tabs} //TODO: ADD DRAWER FUNCTIONALITY FOR MOBILE
+            {matches ? tabs : tabs} 
           </Toolbar>
         </AppBar>
       </ElevationScroll>

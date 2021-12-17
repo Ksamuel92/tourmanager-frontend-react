@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import ShowFormModal from "./ShowFormModal";
-import ConfirmationDialog from "../../Layout/ConfirmationDialog";
+import ConfirmationDialog from "../../layout/ConfirmationDialog"
 import Moment from "react-moment";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
