@@ -1,5 +1,5 @@
-import { useState, useEffect, cloneElement } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { useState, useEffect, cloneElement, Fragment } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,7 @@ import { useScrollTrigger } from "@mui/material";
 import { Tabs, Tab } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "../features/auth/authEndpoints";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -63,6 +64,8 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
   const navigate = useNavigate();
   const userToken = useSelector((store) => store.authReducer.token);
@@ -146,6 +149,91 @@ const NavBar = () => {
       console.log(err); //handle error
     }
   };
+
+  const tabs = (
+    <Fragment>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        TabIndicatorProps={{ style: { background: "#F3CFC6" } }}
+      >
+        <Tab
+          className={classes.tab}
+          label="Home"
+          component={NavLink}
+          to="/"
+          key={0}
+        />
+        {loggedIn && (
+          <Tab
+            aria-owns={anchorEl ? "show-menu" : undefined}
+            aria-haspopup={anchorEl ? "true" : undefined}
+            onMouseOver={handleClick}
+            className={classes.tab}
+            label="Shows"
+            component={NavLink}
+            to="/shows"
+            key={1}
+          />
+        )}
+        {loggedIn && (
+          <Tab
+            className={classes.tab}
+            label="Promoters"
+            component={NavLink}
+            to="/promoters"
+            key={2}
+          />
+        )}
+        {loggedIn && (
+          <Tab
+            className={classes.tab}
+            label="User Profile"
+            component={NavLink}
+            to="/user"
+            key={3}
+          />
+        )}
+      </Tabs>
+      {loggedIn ? (
+        <Button color="inherit" onClick={handleLogout}>
+          Logout
+        </Button>
+      ) : (
+        <Link to={"auth"} className={classes.login}>
+          <Button color="inherit">Login</Button>
+        </Link>
+      )}
+
+      <Menu
+        id="show-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        classes={{ paper: classes.menu }}
+        MenuListProps={{ onMouseLeave: handleClose }}
+        elevation={0}
+      >
+        {menuOptions.map((menuOption, index) => (
+          <MenuItem
+            key={index}
+            component={Link}
+            to={menuOption.link}
+            classes={{ root: classes.menuItem }}
+            selected={index === selectedIndex && value === 1}
+            onClick={(event) => {
+              handleMenuItemClick(event, index);
+              setValue(1);
+              handleClose();
+            }}
+          >
+            {menuOption.name}
+          </MenuItem>
+        ))}
+      </Menu>
+    </Fragment>
+  );
+
   return (
     <div sx={{ flexGrow: 1 }}>
       <ElevationScroll>
@@ -154,86 +242,8 @@ const NavBar = () => {
             <Typography variant="h6" className={classes.title}>
               TourManager
             </Typography>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              TabIndicatorProps={{ style: { background: "#F3CFC6" } }}
-            >
-              <Tab
-                className={classes.tab}
-                label="Home"
-                component={NavLink}
-                to="/"
-                key={0}
-              />
-              {loggedIn && (
-                <Tab
-                  aria-owns={anchorEl ? "show-menu" : undefined}
-                  aria-haspopup={anchorEl ? "true" : undefined}
-                  onMouseOver={handleClick}
-                  className={classes.tab}
-                  label="Shows"
-                  component={NavLink}
-                  to="/shows"
-                  key={1}
-                />
-              )}
-              {loggedIn && (
-                <Tab
-                  className={classes.tab}
-                  label="Promoters"
-                  component={NavLink}
-                  to="/promoters"
-                  key={2}
-                />
-              )}
-              {loggedIn && (
-                <Tab
-                  className={classes.tab}
-                  label="User Profile"
-                  component={NavLink}
-                  to="/user"
-                  key={3}
-                />
-              )}
-            </Tabs>
-            {loggedIn ? (
-              <Button color="inherit" onClick={handleLogout}>
-                Logout
-              </Button>
-            ) : (
-              <Link to={"auth"} className={classes.login}>
-                <Button color="inherit">Login</Button>
-              </Link>
-            )}
+            {matches ? tabs : tabs} //TODO: ADD DRAWER FUNCTIONALITY FOR MOBILE
           </Toolbar>
-
-          <Menu
-            id="show-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            classes={{ paper: classes.menu }}
-            MenuListProps={{ onMouseLeave: handleClose }}
-            elevation={0}
-          >
-            {menuOptions.map((menuOption, index) => (
-              <MenuItem
-                key={index}
-                component={Link}
-                to={menuOption.link}
-                classes={{ root: classes.menuItem }}
-                selected={index === selectedIndex && value === 1}
-                onClick={(event) => {
-                  handleMenuItemClick(event, index);
-                  setValue(1);
-                  handleClose();
-                }}
-              >
-                {menuOption.name}
-              </MenuItem>
-            ))}
-          </Menu>
         </AppBar>
       </ElevationScroll>
       <Toolbar />
