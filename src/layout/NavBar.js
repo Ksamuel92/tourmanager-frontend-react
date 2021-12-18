@@ -9,15 +9,16 @@ import { useScrollTrigger } from "@mui/material";
 import { Tabs, Tab } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useLogoutMutation } from "../features/auth/authEndpoints";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
@@ -43,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  drawerIconContainer: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
 }));
 
 function ElevationScroll(props) {
@@ -61,7 +67,8 @@ const NavBar = () => {
   const [value, setValue] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const classes = useStyles();
   const theme = useTheme();
@@ -71,20 +78,24 @@ const NavBar = () => {
   const userToken = useSelector((store) => store.authReducer.token);
   const [logoutUser] = useLogoutMutation();
 
+  const iOS =
+    typeof navigator !== "undefined" &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-    setOpen(true);
+    setOpenMenu(true);
   };
 
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
     setSelectedIndex(i);
   };
 
   const handleClose = (e) => {
     setAnchorEl(null);
-    setOpen(false);
+    setOpenMenu(false);
   };
 
   const menuOptions = [
@@ -134,8 +145,8 @@ const NavBar = () => {
     }
   }, [userToken]);
 
-  const handleChange = (e, value) => {
-    setValue(value);
+  const handleChange = (e, newValue) => {
+    setValue(newValue);
   };
 
   const handleLogout = async (e) => {
@@ -208,7 +219,7 @@ const NavBar = () => {
       <Menu
         id="show-menu"
         anchorEl={anchorEl}
-        open={open}
+        open={openMenu}
         onClose={handleClose}
         classes={{ paper: classes.menu }}
         MenuListProps={{ onMouseLeave: handleClose }}
@@ -233,7 +244,80 @@ const NavBar = () => {
       </Menu>
     </Fragment>
   );
-              //TODO: ADD DRAWER FUNCTIONALITY FOR MOBILE
+
+  const drawer = (
+    <Fragment>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+      >
+        <List disablePadding>
+          <ListItem
+            onClick={() => setOpenDrawer(false)}
+            divider
+            button
+            component={Link}
+            to="/"
+          >
+            <ListItemText disableTypography>Home</ListItemText>
+          </ListItem>
+          <ListItem
+            onClick={() => setOpenDrawer(false)}
+            divider
+            button
+            component={Link}
+            to="/auth"
+          >
+            <ListItemText disableTypography>Login</ListItemText>
+          </ListItem>
+          {loggedIn && (
+            <ListItem
+              onClick={() => setOpenDrawer(false)}
+              divider
+              button
+              component={Link}
+              to="/shows"
+            >
+              <ListItemText disableTypography>Shows</ListItemText>
+            </ListItem>
+          )}
+          {loggedIn && (
+            <ListItem
+              onClick={() => setOpenDrawer(false)}
+              divider
+              button
+              component={Link}
+              to="/promoters"
+            >
+              <ListItemText disableTypography>Promoters</ListItemText>
+            </ListItem>
+          )}
+          {loggedIn && (
+            <ListItem
+              onClick={() => setOpenDrawer(false)}
+              divider
+              button
+              component={Link}
+              to="/user"
+            >
+              <ListItemText disableTypography>User Profile</ListItemText>
+            </ListItem>
+          )}
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+      >
+        <MenuIcon />
+      </IconButton>
+    </Fragment>
+  );
+  //TODO: ADD DRAWER FUNCTIONALITY FOR MOBILE
   return (
     <div sx={{ flexGrow: 1 }}>
       <ElevationScroll>
@@ -242,7 +326,7 @@ const NavBar = () => {
             <Typography variant="h6" className={classes.title}>
               TourManager
             </Typography>
-            {matches ? tabs : tabs} 
+            {matches ? drawer : tabs}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
