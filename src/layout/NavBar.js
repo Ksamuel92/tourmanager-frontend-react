@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menu: {
     backgroundColor: theme.palette.common.millenialPink,
-    color: "white",
+    color: "black",
     width: 200,
   },
   menuItem: {
@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "transparent",
     },
+  },
+  drawer: {
+    backgroundColor: theme.palette.common.millenialPink,
   },
 }));
 
@@ -248,6 +251,7 @@ const NavBar = () => {
   const drawer = (
     <Fragment>
       <SwipeableDrawer
+        PaperProps={{ style: { root: classes.drawer } }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={openDrawer}
@@ -264,15 +268,17 @@ const NavBar = () => {
           >
             <ListItemText disableTypography>Home</ListItemText>
           </ListItem>
-          <ListItem
-            onClick={() => setOpenDrawer(false)}
-            divider
-            button
-            component={Link}
-            to="/auth"
-          >
-            <ListItemText disableTypography>Login</ListItemText>
-          </ListItem>
+          {!loggedIn && (
+            <ListItem
+              onClick={() => setOpenDrawer(false)}
+              divider
+              button
+              component={Link}
+              to="/auth"
+            >
+              <ListItemText disableTypography>Login</ListItemText>
+            </ListItem>
+          )}
           {loggedIn && (
             <ListItem
               onClick={() => setOpenDrawer(false)}
@@ -304,6 +310,11 @@ const NavBar = () => {
               to="/user"
             >
               <ListItemText disableTypography>User Profile</ListItemText>
+            </ListItem>
+          )}
+          {loggedIn && (
+            <ListItem onClick={handleLogout} divider button>
+              <ListItemText disableTypography>Logout</ListItemText>
             </ListItem>
           )}
         </List>
