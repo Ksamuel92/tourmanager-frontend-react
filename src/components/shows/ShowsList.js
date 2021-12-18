@@ -1,4 +1,4 @@
-import { useGetShowsQuery } from "../../features/shows/show-slice";
+import { useGetShowsQuery } from "../../features/shows/show-slice"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ShowDetails from "../shows/ShowDetails";
@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import { Fragment } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
-const ShowsList = (props) => {
+const ShowsList = () => {
   const { id, name } = useSelector((store) => store.authReducer.user);
 
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
