@@ -1,5 +1,5 @@
 import { tourManagerApi } from "../../services/api";
-import { setCredentials, logoutUser } from "../../features/auth/authSlice";
+import { setCredentials, logoutUser } from "./authSlice";
 
 export const authApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({

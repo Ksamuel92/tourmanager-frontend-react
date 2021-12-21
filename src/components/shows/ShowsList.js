@@ -1,4 +1,4 @@
-import { useGetShowsQuery } from "../../features/shows/show-slice"
+import { useGetShowsQuery } from "../../features/shows/show-endpoints";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ShowDetails from "../shows/ShowDetails";

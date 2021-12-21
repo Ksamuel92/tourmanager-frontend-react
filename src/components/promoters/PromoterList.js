@@ -1,4 +1,4 @@
-import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
+import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
 import PromoterDetails from "./PromoterDetails";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";

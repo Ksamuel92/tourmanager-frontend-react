@@ -40,12 +40,13 @@ const LandingGrid = (props) => {
             </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
+            <Card variant="outlined" sx={{ maxWidth: 450 }}>
               <CardContent>
-                <Typography variant="h6">Stay Connected</Typography>
+                <Typography variant="h6">Stay connected</Typography>
                 <Divider />
                 <Typography variant="subtitle1">
-                  Have the venue wifi available for your client, always.
+                  Have the venue's wifi information available for your clients,
+                  always.
                 </Typography>
               </CardContent>
             </Card>

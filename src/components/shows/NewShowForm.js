@@ -18,8 +18,8 @@ import TimePicker from "@mui/lab/TimePicker";
 
 import { useState, useEffect, Fragment } from "react";
 import Grid from "@mui/material/Grid";
-import { useAddShowMutation } from "../../features/shows/show-slice";
-import { useGetPromotersQuery } from "../../features/promoters/promoter-slice";
+import { useAddShowMutation } from "../../features/shows/show-endpoints";
+import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { filterArrayDuplicatesById as filterPromoters } from "../../helper/filterArrayDuplicates";

@@ -1,6 +1,6 @@
 import { TextField, Button, Alert } from "@mui/material";
 import { useState, Fragment } from "react";
-import { useEditPromoterMutation } from "../../features/promoters/promoter-slice";
+import { useEditPromoterMutation } from "../../features/promoters/promoter-endpoints";
 import Grid from "@mui/material/Grid";
 
 const EditPromoterForm = (props) => {

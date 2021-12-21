@@ -16,7 +16,7 @@ import { CssBaseline } from "@mui/material";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { useSelector } from "react-redux";
-import ErrorBoundary from "./layout/ErrorBoundary"
+import ErrorBoundary from "./layout/ErrorBoundary";
 import ShowsList from "./components/shows/ShowsList";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,7 @@ function App() {
                     element={userToken ? <Shows /> : <Auth />}
                   >
                     <Route
-                      path="/shows/"
+                      index
                       element={userToken ? <ShowsList /> : <Auth />}
                     />
                     <Route
@@ -59,7 +59,7 @@ function App() {
                     element={userToken ? <Promoters /> : <Auth />}
                   >
                     <Route
-                      path="/promoters/"
+                      index
                       element={userToken ? <PromoterList /> : <Auth />}
                     />
                   </Route>

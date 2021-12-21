@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Card from "@mui/material/Card";
 import ShowFormModal from "./ShowFormModal";
-import ConfirmationDialog from "../../layout/ConfirmationDialog"
+import ConfirmationDialog from "../../layout/ConfirmationDialog";
 import Moment from "react-moment";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
@@ -21,7 +21,7 @@ import WifiIcon from "@mui/icons-material/Wifi";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import { useState } from "react";
-import { useDeleteShowMutation } from "../../features/shows/show-slice";
+import { useDeleteShowMutation } from "../../features/shows/show-endpoints";
 
 const ShowDetails = (props) => {
   const { venue, date, loadin, guarantee, merch, green_room, wifi, city, id } =

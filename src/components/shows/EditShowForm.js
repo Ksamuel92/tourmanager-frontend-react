@@ -12,7 +12,7 @@ import {
 import DatePicker from "@mui/lab/DatePicker";
 import TimePicker from "@mui/lab/TimePicker";
 import { useState } from "react";
-import { useEditShowMutation } from "../../features/shows/show-slice";
+import { useEditShowMutation } from "../../features/shows/show-endpoints";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import Alert from "@mui/material/Alert";
