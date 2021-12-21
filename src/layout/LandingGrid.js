@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import Card from "@mui/material/Card";
 import { Typography, CardContent, Box } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import Fade from "@mui/material/Fade";
 
 const LandingGrid = (props) => {
@@ -8,16 +9,17 @@ const LandingGrid = (props) => {
     <Fade in={props.fade}>
       <Box mt={2} pt={3}>
         <Grid
-          spacing={0}
+          spacing={5}
           container
           direction="row"
           alignItems="center"
           justifyContent="space-between"
         >
-          <Grid item>
-            <Card variant="outlined" sx={{ maxWidth: 480 }} ml={2}>
+          <Grid item xs={4}>
+            <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
               <CardContent>
-                <Typography variant="h5">A Better Way To Tour</Typography>
+                <Typography variant="h6">Always there when you call</Typography>
+                <Divider />
                 <Typography variant="subtitle1">
                   Keep track of the details so you can put out the other fires
                   and get your band paid.
@@ -25,24 +27,25 @@ const LandingGrid = (props) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item>
-            <Card variant="outlined" sx={{ maxWidth: 480 }}>
+          <Grid item xs={4}>
+            <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
               <CardContent>
-                <Typography variant="h5">Stay Organized</Typography>
+                <Typography variant="h6">Always on time</Typography>
+                <Divider />
                 <Typography variant="subtitle1">
-                  Always have the venue's wifi information at the ready for your
-                  desperate, desperate band.
+                  With TourManager, you'll never leave the hotel just a little
+                  too late.
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-          <Grid item>
-            <Card variant="outlined" sx={{ maxWidth: 480 }}>
+          <Grid item xs={4}>
+            <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
               <CardContent>
-                <Typography variant="h5">Always On Time</Typography>
+                <Typography variant="h6">Stay Connected</Typography>
+                <Divider />
                 <Typography variant="subtitle1">
-                  With TourManager, you'll never leave the hotel just a little
-                  too late.
+                  Have the venue wifi available for your client, always.
                 </Typography>
               </CardContent>
             </Card>
