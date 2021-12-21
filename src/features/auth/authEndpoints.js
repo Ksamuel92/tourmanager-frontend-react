@@ -18,7 +18,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
 
           dispatch(setCredentials({ user, token }));
         } catch (err) {
-          console.log(err); //Error handled with Hooks
+          //Error handled with Hooks
         }
       },
       inValidateTags: ["Show", "Promoter"],
@@ -36,9 +36,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           const token = headers.get("Authorization");
           const user = data.data;
           dispatch(setCredentials({ user, token }));
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       },
       inValidateTags: ["Show", "Promoter"],
     }),
@@ -54,9 +52,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           if (meta.response.ok) {
             dispatch(logoutUser());
           }
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       },
       inValidateTags: ["Show", "Promoter"],
     }),
