@@ -30,13 +30,8 @@ const EditPromoterForm = (props) => {
     const payload = {
       ...editPromoterFormState,
     };
-    try {
-      const response = await editPromoter(payload).unwrap();
-      debugger;
-      props.handleClose();
-    } catch (err) {
-      console.log(err);
-    }
+    editPromoter(payload);
+    props.handleClose();
   };
 
   return (
