@@ -1,8 +1,12 @@
-import { Grid } from "@material-ui/core";
-import Card from "@mui/material/Card";
-import { Typography, CardContent, Box } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import Fade from "@mui/material/Fade";
+import {
+  Grid,
+  Card,
+  Typography,
+  CardContent,
+  Box,
+  Divider,
+  Fade,
+} from "@mui/material";
 
 const LandingGrid = (props) => {
   return (

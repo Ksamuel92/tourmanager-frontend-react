@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
 import { Fragment } from "react";
-import Fade from "@mui/material/Fade";
+import { Typography, Fade } from "@mui/material";
 
 const LandingHeader = (props) => {
   return (
