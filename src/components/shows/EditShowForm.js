@@ -1,3 +1,6 @@
+import { useState, Fragment } from "react";
+import { useSelector } from "react-redux";
+import { useEditShowMutation } from "../../features/shows/show-endpoints";
 import {
   TextField,
   FormControl,
@@ -8,15 +11,10 @@ import {
   FormControlLabel,
   Button,
   FormGroup,
+  Grid,
+  Alert,
 } from "@mui/material";
-import DatePicker from "@mui/lab/DatePicker";
-import TimePicker from "@mui/lab/TimePicker";
-import { useState } from "react";
-import { useEditShowMutation } from "../../features/shows/show-endpoints";
-import Grid from "@mui/material/Grid";
-import { useSelector } from "react-redux";
-import Alert from "@mui/material/Alert";
-import { Fragment } from "react";
+import { DatePicker, TimePicker } from "@mui/lab";
 
 const EditShowForm = (props) => {
   const {
@@ -57,8 +55,14 @@ const EditShowForm = (props) => {
   });
   const user = useSelector((store) => store.authReducer.user);
 
-  const [editShow, { isError: editShowHasError, error: editShowError }] =
-    useEditShowMutation();
+  const [
+    editShow,
+    {
+      isSuccess: editShowSuccessful,
+      isError: editShowHasError,
+      error: editShowError,
+    },
+  ] = useEditShowMutation();
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -119,7 +123,16 @@ const EditShowForm = (props) => {
   console.log(editPromoterState);
   return (
     <Fragment>
-      {editShowHasError && <Alert severity="error" onClose={() => {}}></Alert>}
+      {editShowSuccessful && (
+        <Alert severity="success" onClose={() => {}}>
+          Show successfully edited.
+        </Alert>
+      )}
+      {editShowHasError && (
+        <Alert severity="error" onClose={() => {}}>
+          {editShowError}
+        </Alert>
+      )}
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item>

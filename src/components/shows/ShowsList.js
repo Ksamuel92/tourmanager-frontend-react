@@ -1,12 +1,10 @@
-import { useGetShowsQuery } from "../../features/shows/show-endpoints";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import ShowDetails from "../shows/ShowDetails";
-import { useSelector } from "react-redux";
-import { Link as MUILinkWrapper, Box } from "@material-ui/core";
-import Divider from "@mui/material/Divider";
 import { Fragment } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useGetShowsQuery } from "../../features/shows/show-endpoints";
+import ShowDetails from "../shows/ShowDetails";
+import { Grid, Typography, Divider } from "@mui/material";
+import { Link as MUILinkWrapper, Box } from "@material-ui/core";
 
 const ShowsList = () => {
   const { id, name } = useSelector((store) => store.authReducer.user);
@@ -14,7 +12,6 @@ const ShowsList = () => {
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
     refetchOnMountOrArgChange: true,
   });
-  debugger;
   return (
     <div>
       <Fragment>

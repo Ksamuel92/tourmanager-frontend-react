@@ -1,12 +1,12 @@
+import EditShowForm from "./EditShowForm";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
 } from "@mui/material";
-import EditShowForm from "./EditShowForm";
 
-const ShowFormModal = (props) => {
+const EditShowFormModal = (props) => {
   // debugger;
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
@@ -23,4 +23,4 @@ const ShowFormModal = (props) => {
   );
 };
 
-export default ShowFormModal;
+export default EditShowFormModal;
