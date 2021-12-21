@@ -1,7 +1,6 @@
-import { TextField, Button, Alert } from "@mui/material";
 import { useState, Fragment } from "react";
 import { useEditPromoterMutation } from "../../features/promoters/promoter-endpoints";
-import Grid from "@mui/material/Grid";
+import { TextField, Button, Alert, Grid } from "@mui/material";
 
 const EditPromoterForm = (props) => {
   const { name, email, id } = props.promoter;
@@ -14,7 +13,11 @@ const EditPromoterForm = (props) => {
 
   const [
     editPromoter,
-    { isError: editPromoterHasError, error: editPromoterError },
+    {
+      isSuccess: editPromoterSuccess,
+      isError: editPromoterHasError,
+      error: editPromoterError,
+    },
   ] = useEditPromoterMutation();
 
   const handleChange = (e) => {
@@ -36,6 +39,12 @@ const EditPromoterForm = (props) => {
 
   return (
     <Fragment>
+      {editPromoterSuccess && (
+        <Alert severity="success" onClose={() => {}}>
+          {" "}
+          Promoter successfully edited.{" "}
+        </Alert>
+      )}
       {editPromoterHasError && (
         <Alert severity="error" onClose={() => {}}>
           {" "}

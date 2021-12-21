@@ -1,13 +1,13 @@
-import { Typography, Button } from "@material-ui/core";
-
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Card from "@mui/material/Card";
-import PromoterFormModal from "./PromoterFormModal";
-
 import { useState } from "react";
-import Divider from "@mui/material/Divider";
+import PromoterFormModal from "./PromoterFormModal";
+import {
+  CardHeader,
+  CardContent,
+  CardActions,
+  Card,
+  Divider,
+} from "@mui/material";
+import { Typography, Button } from "@material-ui/core";
 
 const PromoterDetails = (props) => {
   const { name, email, shows } = props.promoter;

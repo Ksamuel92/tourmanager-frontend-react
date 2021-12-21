@@ -1,13 +1,12 @@
+import EditPromoterForm from "./EditPromoterForm";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
 } from "@mui/material";
-import EditPromoterForm from "./EditPromoterForm";
 
 const PromoterFormModal = (props) => {
-  // debugger;
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
       <DialogTitle>Edit Promoter</DialogTitle>

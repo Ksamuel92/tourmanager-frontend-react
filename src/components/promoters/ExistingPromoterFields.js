@@ -1,6 +1,7 @@
-import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
 import { useState } from "react";
+import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+
 const ExistingPromoterFields = (props) => {
   const {
     data: promoterData,

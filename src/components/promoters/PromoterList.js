@@ -1,10 +1,9 @@
-import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
-import PromoterDetails from "./PromoterDetails";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useGetPromotersQuery } from "../../features/promoters/promoter-endpoints";
+import PromoterDetails from "./PromoterDetails";
 import { filterArrayDuplicatesById as filterPromoters } from "../../helper/filterArrayDuplicates";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { Grid, Typography } from "@mui/material";
 
 const PromoterList = () => {
   const { id } = useSelector((store) => store.authReducer.user);
