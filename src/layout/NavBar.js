@@ -153,14 +153,10 @@ const NavBar = () => {
   };
 
   const handleLogout = async (e) => {
-    try {
-      const response = await logoutUser().unwrap();
-      if (response.status === 200) {
-        navigate("/");
-        setLoggedIn(false);
-      }
-    } catch (err) {
-      console.log(err); //handle error
+    const response = await logoutUser().unwrap();
+    if (response.status === 200) {
+      navigate("/");
+      setLoggedIn(false);
     }
   };
 
@@ -251,7 +247,7 @@ const NavBar = () => {
   const drawer = (
     <Fragment>
       <SwipeableDrawer
-        PaperProps={{ style: { root: classes.drawer } }}
+        PaperProps={{ classes: { root: classes.drawer } }}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={openDrawer}
