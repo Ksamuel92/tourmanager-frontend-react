@@ -40,10 +40,7 @@ const useAlert = (actionStatusSuccessObject, actionStatusErrorObject) => {
     </Snackbar>
   );
 
-  return {
-    successAlert,
-    errorAlert,
-  };
+  return [successAlert, openSnackbarSuccess, errorAlert, openSnackbarError];
 };
 
 export default useAlert;
