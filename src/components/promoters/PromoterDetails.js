@@ -23,7 +23,7 @@ const PromoterDetails = (props) => {
 
   const promoterShows = shows.map((show, i) => (
     <Typography key={i} variant="body2" color="textPrimary">
-      {show.venue} - {show.date.toLocaleString()}
+      {show.venue} - {show.city}
     </Typography>
   ));
   return (
