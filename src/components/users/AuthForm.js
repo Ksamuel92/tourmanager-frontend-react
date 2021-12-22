@@ -105,10 +105,8 @@ const AuthForm = () => {
           style={{ minHeight: "50vh" }}
         >
           <Grid item>
-            <Typography variant="h6" align="center">
-              {signUp && <Typography variant="h3">Sign Up</Typography>}
-              {!signUp && <Typography variant="h3">Log In</Typography>}
-            </Typography>
+            {signUp && <Typography variant="h3">Sign Up</Typography>}
+            {!signUp && <Typography variant="h3">Log In</Typography>}
           </Grid>
           <Grid item>
             <Fade in={signUp}>
@@ -157,7 +155,13 @@ const AuthForm = () => {
               <FormControlLabel
                 mt="15px"
                 control={<Switch color="primary" onChange={handleSwitch} />}
-                label={signUp ? "Log In" : "Sign Up"}
+                label={
+                  signUp ? (
+                    <Typography variant="caption">Log In</Typography>
+                  ) : (
+                    <Typography variant="caption">Sign Up</Typography>
+                  )
+                }
                 labelPlacement="bottom"
               />
               {/* <Typography>Sign Up</Typography> */}
