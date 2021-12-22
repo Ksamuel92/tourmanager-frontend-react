@@ -77,12 +77,7 @@ const AuthForm = () => {
           }}
           open={openSignUpError}
         >
-          <Alert
-            severity="error"
-            onClose={() => {
-              setOpenSignUpError(false);
-            }}
-          >
+          <Alert severity="error">
             {signUpErrorMessage.data.status.message}
           </Alert>
         </Snackbar>
@@ -95,14 +90,7 @@ const AuthForm = () => {
           }}
           open={openLoginError}
         >
-          <Alert
-            severity="error"
-            onClose={() => {
-              setOpenLoginError(false);
-            }}
-          >
-            {loginErrorMessage.data.error}
-          </Alert>
+          <Alert severity="error">{loginErrorMessage.data.error}</Alert>
         </Snackbar>
       )}
 
