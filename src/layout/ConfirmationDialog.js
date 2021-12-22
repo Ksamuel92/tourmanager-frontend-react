@@ -15,7 +15,8 @@ const ConfirmationDialog = (props) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to {props.action} this {props.resource}?
+          Are you sure you want to {props.action.toLowerCase()} this{" "}
+          {props.resource.toLowerCase()}?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
