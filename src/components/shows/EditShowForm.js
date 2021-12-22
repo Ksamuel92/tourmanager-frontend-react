@@ -161,6 +161,7 @@ const EditShowForm = (props) => {
                 name="date"
                 className="date"
                 label="Date"
+                disableOpenPicker={true}
                 value={editShowFormState.date}
                 onChange={handleMomentDate}
                 renderInput={(params) => <TextField {...params} />}
@@ -168,7 +169,9 @@ const EditShowForm = (props) => {
               <TimePicker
                 name="loadin"
                 className="loadin"
+                type="time"
                 label="Load In"
+                disableOpenPicker={true}
                 value={editShowFormState.loadin}
                 onChange={handleMomentTime}
                 renderInput={(params) => <TextField {...params} />}
