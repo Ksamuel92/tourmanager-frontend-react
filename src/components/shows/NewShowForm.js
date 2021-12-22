@@ -97,7 +97,6 @@ const NewShowForm = () => {
     });
   };
 
-  //TODO: REFACTOR MOMENTDATE And TIME
   const handleMomentDate = (e) => {
     if (e === null) {
       return;
@@ -192,7 +191,7 @@ const NewShowForm = () => {
                   className="date"
                   type="date"
                   label="Date"
-                  disableOpenPicker="true"
+                  disableOpenPicker={true}
                   inputFormat="MM/DD/YYYY"
                   value={showFormState.date}
                   onChange={handleMomentDate}
@@ -203,7 +202,7 @@ const NewShowForm = () => {
                   className="loadin"
                   type="time"
                   label="Load In"
-                  disableOpenPicker="true"
+                  disableOpenPicker={true}
                   value={showFormState.loadin}
                   onChange={handleMomentTime}
                   renderInput={(params) => <TextField {...params} />}
