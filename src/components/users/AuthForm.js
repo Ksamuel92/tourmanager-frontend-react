@@ -17,6 +17,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 
 const AuthForm = () => {
+  const navigate = useNavigate();
+  const [signUp, setsignUp] = useState(false);
+  const [openSignUpError, setOpenSignUpError] = useState(false);
+  const [openLoginError, setOpenLoginError] = useState(true);
+  const { value: name, bind: bindName } = useInput("");
+  const { value: email, bind: bindEmail } = useInput("");
+  const { value: password, bind: bindPassword } = useInput("");
   const [
     signUpUser,
     {
@@ -29,13 +36,6 @@ const AuthForm = () => {
     loginUser,
     { isSuccess: loginSuccess, isError: loginError, error: loginErrorMessage },
   ] = useLoginMutation();
-  const navigate = useNavigate();
-  const [signUp, setsignUp] = useState(false);
-  const [openSignUpError, setOpenSignUpError] = useState(false);
-  const [openLoginError, setOpenLoginError] = useState(true);
-  const { value: name, bind: bindName } = useInput("");
-  const { value: email, bind: bindEmail } = useInput("");
-  const { value: password, bind: bindPassword } = useInput("");
 
   useEffect(() => {
     if (signUpError && signUp) {
@@ -151,7 +151,6 @@ const AuthForm = () => {
               >
                 Submit
               </Button>
-              {/* <Typography>Login</Typography> */}
               <FormControlLabel
                 mt="15px"
                 control={<Switch color="primary" onChange={handleSwitch} />}
@@ -164,7 +163,6 @@ const AuthForm = () => {
                 }
                 labelPlacement="bottom"
               />
-              {/* <Typography>Sign Up</Typography> */}
             </Stack>
           </Grid>
         </Grid>
