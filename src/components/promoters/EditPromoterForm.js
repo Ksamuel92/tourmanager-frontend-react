@@ -52,7 +52,7 @@ const EditPromoterForm = (props) => {
         </Alert>
       )}
       <form onSubmit={handleSubmit}>
-        <Grid spacing={4}>
+        <Grid container>
           <TextField
             id="name"
             name="name"
