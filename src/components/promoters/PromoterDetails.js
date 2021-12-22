@@ -21,8 +21,8 @@ const PromoterDetails = (props) => {
     setOpen(false);
   };
 
-  const promoterShows = shows.map((show) => (
-    <Typography variant="body2" color="common.black">
+  const promoterShows = shows.map((show, i) => (
+    <Typography key={i} variant="body2" color="textPrimary">
       {show.venue} - {show.date.toLocaleString()}
     </Typography>
   ));
@@ -31,7 +31,7 @@ const PromoterDetails = (props) => {
       <CardContent>
         <CardHeader variant="h5" title={name} subheader={email} />
         <Divider />
-        <Typography sx={{ fontSize: 14 }} color="common.black" gutterBottom>
+        <Typography sx={{ fontSize: 14 }} color="textPrimary" gutterBottom>
           Upcoming Shows With This Promoter
         </Typography>
 
