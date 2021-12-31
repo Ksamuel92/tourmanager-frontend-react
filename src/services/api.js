@@ -7,7 +7,10 @@ export const tourManagerApi = createApi({
     refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authReducer.token;
-      headers.set("Access-Control-Allow-Origin", "*");
+      headers.set(
+        "Access-Control-Allow-Origin",
+        "https://tourmanager-frontend.herokuapp.com/"
+      );
 
       if (token) {
         headers.set("authorization", `${token}`);
