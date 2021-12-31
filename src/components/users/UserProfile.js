@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
-import { Typography, Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 

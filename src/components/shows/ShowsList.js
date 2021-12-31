@@ -3,7 +3,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetShowsQuery } from "../../features/shows/show-endpoints";
 import ShowDetails from "../shows/ShowDetails";
-import { Grid, Typography, Divider } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Link as MUILinkWrapper, Box } from "@material-ui/core";
 
 const ShowsList = () => {
