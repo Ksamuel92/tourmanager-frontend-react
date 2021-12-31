@@ -22,9 +22,9 @@ const LandingGrid = (props) => {
           <Grid item xs={4}>
             <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
               <CardContent>
-                <Typography variant="h6">Always there when you call</Typography>
-                <Divider />
-                <Typography variant="subtitle1">
+                <Typography variant="overline" gutterBottom>Always there when you call</Typography>
+                
+                <Typography variant="subtitle2" gutterBottom>
                   Keep track of the details so you can put out the other fires
                   and get your band paid.
                 </Typography>
@@ -34,9 +34,9 @@ const LandingGrid = (props) => {
           <Grid item xs={4}>
             <Card variant="outlined" sx={{ maxWidth: 480, maxHeight: 480 }}>
               <CardContent>
-                <Typography variant="h6">Always on time</Typography>
-                <Divider />
-                <Typography variant="subtitle1">
+                <Typography variant="overline" gutterBottom>Always on time</Typography>
+                
+                <Typography variant="subtitle2" gutterBottom>
                   With TourManager, you'll never leave the hotel just a little
                   too late.
                 </Typography>
@@ -46,9 +46,9 @@ const LandingGrid = (props) => {
           <Grid item xs={4}>
             <Card variant="outlined" sx={{ maxWidth: 450 }}>
               <CardContent>
-                <Typography variant="h6">Stay connected</Typography>
-                <Divider />
-                <Typography variant="subtitle1">
+                <Typography variant="overline" gutterBottom>Stay connected</Typography>
+                
+                <Typography variant="subtitle2" gutterBottom>
                   Have the venue's wifi information available for your clients,
                   always.
                 </Typography>
