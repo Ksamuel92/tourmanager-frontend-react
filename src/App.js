@@ -1,10 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./styles/Theme";
 import "./App.css";
-import Shows from "./pages/Shows";
+import LoadingSpinner from "./layout/LoadingSpinner";
 import NewShowForm from "./components/shows/NewShowForm";
-import Promoters from "./pages/Promoters";
 import PromoterList from "./components/promoters/PromoterList";
 import Auth from "./pages/Auth";
 import UserProfile from "./components/users/UserProfile";
@@ -28,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Shows = React.lazy(() => import("./pages/Shows"));
+const Promoters = React.lazy(() => import("./pages/Promoters"));
+
 function App() {
   const classes = useStyles();
   const userToken = useSelector((store) => store.authReducer.token);
@@ -37,40 +39,42 @@ function App() {
         <CssBaseline />
         <div className={classes.root}>
           <Layout>
-            <main>
-              <ErrorBoundary>
-                <Routes>
-                  <Route path="/" element={<LandingPage />} />
-                  <Route
-                    path="shows"
-                    element={userToken ? <Shows /> : <Auth />}
-                  >
+            <Suspense fallback={<LoadingSpinner />}>
+              <main>
+                <ErrorBoundary>
+                  <Routes>
+                    <Route path="/" element={<LandingPage />} />
                     <Route
-                      index
-                      element={userToken ? <ShowsList /> : <Auth />}
-                    />
+                      path="shows"
+                      element={userToken ? <Shows /> : <Auth />}
+                    >
+                      <Route
+                        index
+                        element={userToken ? <ShowsList /> : <Auth />}
+                      />
+                      <Route
+                        path="/shows/new"
+                        element={userToken ? <NewShowForm /> : <Auth />}
+                      />
+                    </Route>
                     <Route
-                      path="/shows/new"
-                      element={userToken ? <NewShowForm /> : <Auth />}
-                    />
-                  </Route>
-                  <Route
-                    path="promoters"
-                    element={userToken ? <Promoters /> : <Auth />}
-                  >
+                      path="promoters"
+                      element={userToken ? <Promoters /> : <Auth />}
+                    >
+                      <Route
+                        index
+                        element={userToken ? <PromoterList /> : <Auth />}
+                      />
+                    </Route>
+                    <Route path="/auth" element={<Auth />} />
                     <Route
-                      index
-                      element={userToken ? <PromoterList /> : <Auth />}
+                      path="/user"
+                      element={userToken ? <UserProfile /> : <Auth />}
                     />
-                  </Route>
-                  <Route path="/auth" element={<Auth />} />
-                  <Route
-                    path="/user"
-                    element={userToken ? <UserProfile /> : <Auth />}
-                  />
-                </Routes>
-              </ErrorBoundary>
-            </main>
+                  </Routes>
+                </ErrorBoundary>
+              </main>
+            </Suspense>
           </Layout>
         </div>
       </LocalizationProvider>
