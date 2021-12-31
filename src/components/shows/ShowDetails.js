@@ -89,7 +89,7 @@ const ShowDetails = (props) => {
               process.env.PUBLIC_URL +
               "/assets/magnus-lunay-B1CWLBWEHHI-unsplash.jpg"
             }
-            title="Contemplative Reptile"
+            title="Venue with people"
           />
         </CardActionArea>
         <CardActionArea onClick={handleClick}>
