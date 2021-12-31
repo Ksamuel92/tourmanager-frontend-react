@@ -25,7 +25,7 @@ const PromoterList = () => {
   return (
     <Fragment>
       <Typography variant="h3" color="white" align="center">
-        Promoter List
+        Promoters
       </Typography>
       <Grid container row="true" spacing={1} mt="15px">
         {isLoading && "Loading..."}
