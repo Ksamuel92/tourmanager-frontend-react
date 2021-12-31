@@ -15,10 +15,6 @@ const UserProfile = () => {
 
   return (
     <Fragment>
-      <Typography variant="h4" color="common.white" align="center">
-        User Profile
-      </Typography>
-
       <Box mt={"15px"} align="center">
         <Card sx={{ maxWidth: 345 }}>
           <CardContent>
