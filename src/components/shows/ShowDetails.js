@@ -135,7 +135,7 @@ const ShowDetails = (props) => {
                   <ListItemText>{wifi}</ListItemText>
                 </ListItem>
               )}
-              <Stack row>
+              <Stack row="true">
                 {guarantee && (
                   <ListItem disablePadding>
                     <ListItemIcon>
