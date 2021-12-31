@@ -7,6 +7,7 @@ export const tourManagerApi = createApi({
     refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authReducer.token;
+      headers.set("Access-Control-Allow-Origin", "*");
 
       if (token) {
         headers.set("authorization", `${token}`);
