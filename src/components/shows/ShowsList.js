@@ -12,7 +12,6 @@ const ShowsList = () => {
   const { data, error, isLoading, isSuccess, isError } = useGetShowsQuery(id, {
     refetchOnMountOrArgChange: true,
   });
-  debugger;
   return (
     <div>
       <Fragment>
