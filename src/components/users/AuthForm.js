@@ -94,7 +94,7 @@ const AuthForm = () => {
         </Snackbar>
       )}
 
-      <form onSubmit={handleSubmit} sx={{ outline: "white" }}>
+      <form sx={{ outline: "white" }}>
         <Grid
           container
           spacing={0}
@@ -148,6 +148,7 @@ const AuthForm = () => {
                 variant="contained"
                 color="secondary"
                 align="center"
+                onClick={handleSubmit}
               >
                 Submit
               </Button>
