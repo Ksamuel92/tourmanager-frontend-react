@@ -67,7 +67,7 @@ function ElevationScroll(props) {
 }
 
 const NavBar = () => {
-  const [value, setValue] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
@@ -109,36 +109,36 @@ const NavBar = () => {
   useEffect(() => {
     switch (location.pathname) {
       case "/":
-        if (value !== 0) {
-          setValue(0);
+        if (activeTab !== 0) {
+          setActiveTab(0);
         }
         break;
       case "/shows":
-        if (value !== 1) {
-          setValue(1);
+        if (activeTab !== 1) {
+          setActiveTab(1);
           setSelectedIndex(0);
         }
         break;
       case "/shows/new":
-        if (value !== 1) {
-          setValue(1);
+        if (activeTab !== 1) {
+          setActiveTab(1);
           setSelectedIndex(1);
         }
         break;
       case "/promoters":
-        if (value !== 2) {
-          setValue(2);
+        if (activeTab !== 2) {
+          setActiveTab(2);
         }
         break;
       case "/user":
-        if (value !== 3) {
-          setValue(3);
+        if (activeTab !== 3) {
+          setActiveTab(3);
         }
         break;
       default:
         break;
     }
-  }, [value, location]);
+  }, [activeTab, location]);
 
   useEffect(() => {
     if (userToken) {
@@ -148,8 +148,8 @@ const NavBar = () => {
     }
   }, [userToken]);
 
-  const handleChange = (e, newValue) => {
-    setValue(newValue);
+  const handleChange = (e, newActiveTab) => {
+    setActiveTab(newActiveTab);
   };
 
   const handleLogout = (e) => {
@@ -161,7 +161,7 @@ const NavBar = () => {
   const tabs = (
     <Fragment>
       <Tabs
-        value={value}
+        value={activeTab}
         onChange={handleChange}
         TabIndicatorProps={{ style: { background: "#F3CFC6" } }}
       >
@@ -228,10 +228,10 @@ const NavBar = () => {
             component={Link}
             to={menuOption.link}
             classes={{ root: classes.menuItem }}
-            selected={index === selectedIndex && value === 1}
+            selected={index === selectedIndex && activeTab === 1}
             onClick={(event) => {
               handleMenuItemClick(event, index);
-              setValue(1);
+              setActiveTab(1);
               handleClose();
             }}
           >
