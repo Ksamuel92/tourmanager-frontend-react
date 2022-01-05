@@ -152,12 +152,10 @@ const NavBar = () => {
     setValue(newValue);
   };
 
-  const handleLogout = async (e) => {
-    const response = await logoutUser().unwrap();
-    if (response.status === 200) {
-      navigate("/");
-      setLoggedIn(false);
-    }
+  const handleLogout = (e) => {
+    logoutUser();
+    navigate("/");
+    setLoggedIn(false);
   };
 
   const tabs = (

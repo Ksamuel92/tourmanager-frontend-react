@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const tourManagerApi = createApi({
   reducerPath: "tourManagerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://tourmanager-backend.herokuapp.com",
+    baseUrl: "http://localhost:3001",
     refetchOnFocus: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authReducer.token;

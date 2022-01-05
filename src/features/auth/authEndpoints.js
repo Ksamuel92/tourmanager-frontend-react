@@ -34,7 +34,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
           const { data, meta } = await queryFulfilled;
           const headers = meta.response.headers;
           const token = headers.get("Authorization");
-          const user = data.data;
+          const user = data;
           dispatch(setCredentials({ user, token }));
         } catch (err) {}
       },
@@ -48,7 +48,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
       async onQueryStarted(body, { dispatch, queryFulfilled }) {
         try {
           const { meta } = await queryFulfilled;
-
+          debugger;
           if (meta.response.ok) {
             dispatch(logoutUser());
           }
