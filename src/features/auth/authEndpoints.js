@@ -1,6 +1,19 @@
 import { tourManagerApi } from "../../services/api";
 import { setCredentials, logoutUser } from "./authSlice";
 
+const handleUserAuthorization = async (dispatch, queryFulfilled) => {
+  try {
+    const { data, meta } = await queryFulfilled;
+    const headers = meta.response.headers;
+    const token = headers.get("Authorization");
+    const user = data;
+
+    dispatch(setCredentials({ user, token }));
+  } catch (err) {
+    //Error handled with Hooks
+  }
+};
+
 export const authApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
@@ -10,16 +23,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
         body: credentials,
       }),
       async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
-        try {
-          const { data, meta } = await queryFulfilled;
-          const headers = meta.response.headers;
-          const token = headers.get("Authorization");
-          const user = data.data;
-
-          dispatch(setCredentials({ user, token }));
-        } catch (err) {
-          //Error handled with Hooks
-        }
+        handleUserAuthorization(dispatch, queryFulfilled);
       },
       inValidateTags: ["Show", "Promoter"],
     }),
@@ -30,13 +34,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
         body: credentials,
       }),
       async onQueryStarted(credentials, { dispatch, queryFulfilled }) {
-        try {
-          const { data, meta } = await queryFulfilled;
-          const headers = meta.response.headers;
-          const token = headers.get("Authorization");
-          const user = data;
-          dispatch(setCredentials({ user, token }));
-        } catch (err) {}
+        handleUserAuthorization(dispatch, queryFulfilled);
       },
       inValidateTags: ["Show", "Promoter"],
     }),
@@ -48,7 +46,6 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
       async onQueryStarted(body, { dispatch, queryFulfilled }) {
         try {
           const { meta } = await queryFulfilled;
-          debugger;
           if (meta.response.ok) {
             dispatch(logoutUser());
           }
