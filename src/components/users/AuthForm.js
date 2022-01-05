@@ -1,7 +1,16 @@
-import { TextField, Button } from "@material-ui/core";
-import { Snackbar } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Fade,
+  FormControlLabel,
+  Grid,
+  Snackbar,
+  Switch,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Fragment, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
 import useInput from "../../hooks/useInput";
 import {
   useSignUpMutation,
@@ -9,12 +18,6 @@ import {
 } from "../../features/auth/authEndpoints";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Alert from "@mui/material/Alert";
-import Fade from "@mui/material/Fade";
-import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Typography from "@mui/material/Typography";
 
 const AuthForm = () => {
   const navigate = useNavigate();
