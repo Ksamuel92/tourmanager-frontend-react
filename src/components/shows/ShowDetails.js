@@ -3,9 +3,9 @@ import EditShowFormModal from "./EditShowFormModal";
 import ConfirmationDialog from "../../layout/ConfirmationDialog";
 import { useDeleteShowMutation } from "../../features/shows/show-endpoints";
 import Moment from "react-moment";
-import { Typography, Button } from "@material-ui/core";
 import {
   Alert,
+  Button,
   CardActionArea,
   CardMedia,
   CardContent,
@@ -18,6 +18,7 @@ import {
   Stack,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 
 import {
