@@ -5,7 +5,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
       query: (credentials) => ({
-        url: "signup",
+        url: "/api/signup",
         method: "POST",
         body: credentials,
       }),
@@ -25,7 +25,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     login: builder.mutation({
       query: (credentials) => ({
-        url: "login",
+        url: "/api/login",
         method: "POST",
         body: credentials,
       }),
@@ -42,7 +42,7 @@ export const authApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "logout",
+        url: "/api/logout",
         method: "DELETE",
       }),
       async onQueryStarted(body, { dispatch, queryFulfilled }) {

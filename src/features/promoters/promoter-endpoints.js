@@ -3,12 +3,12 @@ import { tourManagerApi } from "../../services/api";
 const promoterApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     getPromoters: builder.query({
-      query: () => "promoters",
+      query: () => "/api/promoters",
       providesTags: ["Promoter"],
     }),
     addPromoter: builder.mutation({
       query: (body) => ({
-        url: "promoters",
+        url: "/api/promoters",
         method: "POST",
         body,
       }),
@@ -16,7 +16,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     editPromoter: builder.mutation({
       query: (body) => ({
-        url: `promoters/${body.id}`,
+        url: `/api/promoters/${body.id}`,
         method: "PATCH",
         body,
       }),
@@ -24,7 +24,7 @@ const promoterApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     deletePromoter: builder.mutation({
       query: (id) => ({
-        url: `promoters/${id}`,
+        url: `/api/promoters/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Promoter"],

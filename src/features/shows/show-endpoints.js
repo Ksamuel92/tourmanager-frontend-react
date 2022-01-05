@@ -3,12 +3,12 @@ import { tourManagerApi } from "../../services/api";
 const showApiEndpoints = tourManagerApi.injectEndpoints({
   endpoints: (builder) => ({
     getShows: builder.query({
-      query: (id) => "shows",
+      query: (id) => "/api/shows",
       providesTags: ["Show"],
     }),
     addShow: builder.mutation({
       query: (body) => ({
-        url: "shows",
+        url: "/api/shows",
         method: "POST",
         body,
       }),
@@ -16,7 +16,7 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     editShow: builder.mutation({
       query: (body) => ({
-        url: `shows/${body.id}`,
+        url: `api/shows/${body.id}`,
         method: "PATCH",
         body,
       }),
@@ -24,7 +24,7 @@ const showApiEndpoints = tourManagerApi.injectEndpoints({
     }),
     deleteShow: builder.mutation({
       query: (id) => ({
-        url: `shows/${id}`,
+        url: `api/shows/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Show"],
