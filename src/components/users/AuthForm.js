@@ -145,12 +145,25 @@ const AuthForm = () => {
                 sx={{ marginBottom: "15px" }}
               />
             </Grid>
-            <Stack direction="row" spacing={1}>
+            <Stack
+              direction="row"
+              sx={{
+                justifyContent: "space-between",
+              }}
+              spacing={1}
+            >
               <Button
                 type="submit"
                 variant="contained"
-                color="secondary"
+                sx={{
+                  backgroundColor: "#FFE4E1",
+                  color: "#000000",
+                  "&:hover": {
+                    backgroundColor: "#fff",
+                  },
+                }}
                 align="center"
+                size="small"
                 onClick={handleSubmit}
               >
                 Submit
