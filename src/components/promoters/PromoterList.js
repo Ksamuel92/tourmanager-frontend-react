@@ -27,7 +27,13 @@ const PromoterList = () => {
       <Typography variant="h3" color="white" align="center">
         Promoters
       </Typography>
-      <Grid container row="true" spacing={1} mt="15px">
+      <Grid
+        container
+        sx={{ justifyContent: "space-evenly" }}
+        row="true"
+        spacing={1}
+        mt="15px"
+      >
         {isLoading && "Loading..."}
         {isError && error.message}
         {isSuccess &&
