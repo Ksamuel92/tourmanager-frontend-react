@@ -85,7 +85,6 @@ const NewShowForm = () => {
     });
   };
   const handleCheck = (e) => {
-    // debugger;
     const { name, checked } = e.target;
     if (name === "new_promoter") {
       setCreateNewPromoter(checked);
@@ -137,8 +136,11 @@ const NewShowForm = () => {
         user_id: user.id,
       };
     }
-    submitShow(payload);
-    navigate("/shows", { state: showSubmitted });
+    const response = await submitShow(payload).unwrap();
+    debugger;
+    if (response.id) {
+      navigate("/shows", { state: showSubmitted });
+    }
   };
 
   return (
